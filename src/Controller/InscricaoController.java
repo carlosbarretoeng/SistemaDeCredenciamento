@@ -2,6 +2,7 @@
 package Controller;
 
 import Model.Inscricao;
+import Util.DataType;
 
 public class InscricaoController extends Controller {
 

@@ -3,8 +3,13 @@ package Model;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "Inscricao")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Inscricao extends Base {
     
     private Date data;

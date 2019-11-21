@@ -2,12 +2,15 @@ package View;
 
 import DAO.JPAfactory;
 import Util.Arquivo;
+import java.awt.Image;
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Configuracao extends javax.swing.JFrame {
@@ -215,20 +218,23 @@ public class Configuracao extends javax.swing.JFrame {
         conexao.add(new String(this.jPasswordFieldSenha.getPassword()));
         
         if(!this.testarConexao(conexao)) {
-            JOptionPane.showMessageDialog(rootPane, "Conexão inválida!");
+            JOptionPane.showMessageDialog(rootPane, "Erro ao conectar", "Conexão inválida", 0, new ImageIcon("icones//error.png"));
             return;
         }
 
-        Arquivo.escrever("arquivos//conexao.txt", conexao);
-
-        JPAfactory.configurar(propriedades);
-
-        JOptionPane.showMessageDialog(rootPane, "Configuração de conexão salva com sucesso!");
-
-        this.dispose();
+        try {
+            Arquivo.escrever("arquivos//conexao.txt", conexao);
+            JPAfactory.configurar(propriedades);
+            JOptionPane.showMessageDialog(rootPane, "Configuração de conexão salva com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+            this.dispose();
+        } 
+        catch (IOException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao escrever arquivo!", "Erro", 0, new ImageIcon("icones//error.png"));
+        }
+        
     }//GEN-LAST:event_jButtonConfigurarActionPerformed
 
-    public boolean testarConexao(ArrayList<String> conexao) {
+    public static boolean testarConexao(ArrayList<String> conexao) {
         try {
             Class.forName((String) conexao.get(0));
             DriverManager.getConnection(conexao.get(1), conexao.get(2), conexao.get(3));

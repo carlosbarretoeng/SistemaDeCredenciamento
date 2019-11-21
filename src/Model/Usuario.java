@@ -2,8 +2,13 @@
 package Model;
 
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity()
+@XmlRootElement(name = "Usuario")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Usuario extends Base {
     private String nome, login, senha, tipo;
 

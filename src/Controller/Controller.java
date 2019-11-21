@@ -3,6 +3,7 @@ package Controller;
 
 import DAO.JPApersistence;
 import Model.Base;
+import Util.DataType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public abstract class Controller {
     }
     
     public void insert(String data) {
-        this.persistence.salvar(this.class_.toObject(data));
+        this.persistence.salvar(this.class_.jsonToObject(data));
     }
     
     public void delete(int id) {
@@ -27,15 +28,16 @@ public abstract class Controller {
     }
     
     public String select(int id) {
-        return this.persistence.recuperar(id).toJson();
+        return this.persistence.recuperar(id).objectToJson();
     }
     
     public ArrayList<String> select() {
         List<Base> result = this.persistence.recuperar();
         ArrayList<String> data = new ArrayList<>();
         result.stream().forEach((obj) -> {
-            data.add(obj.toJson());
+            data.add(obj.objectToJson());
         });
         return data;
     }
+    
 }

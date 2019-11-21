@@ -21,7 +21,7 @@ public class JPAfactory {
                 JPAfactory con = new JPAfactory();
                 System.out.println("Conexão JPA aberta!");
             }
-            return factory.createEntityManager();
+            return factory.createEntityManager(JPAfactory.propriedades);
         }
         catch(Exception e){
             System.out.println("Erro ao abrir conexão JPA ou criar gerenciador! " + e);

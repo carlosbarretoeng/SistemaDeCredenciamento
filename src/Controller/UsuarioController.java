@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.JPAfunctions;
 import Model.Usuario;
+import Util.DataType;
 
 public class UsuarioController extends Controller {
 
