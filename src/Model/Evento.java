@@ -16,17 +16,9 @@ public class Evento extends Base {
     
     private String nome, descricao, local;
     private int capacidade;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date data_inicio, data_termino;
-
-    public Evento(String nome, String descricao, String local, int capacidade, Date data_inicio, Date data_termino) {
-        this.nome = nome;
-        this.descricao = descricao;
-        this.local = local;
-        this.capacidade = capacidade;
-        this.data_inicio = data_inicio;
-        this.data_termino = data_termino;
-    }
+    private String hora_inicio, hora_termino;
 
     public Evento() {
     }

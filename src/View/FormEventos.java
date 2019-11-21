@@ -399,15 +399,17 @@ public class FormEventos extends javax.swing.JDialog {
 
     private void jLabelSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalvarMouseClicked
         JsonObject json = new JsonObject();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         json.addProperty("id", this.jTextFieldId.getText());
         json.addProperty("nome", this.jTextFieldNome.getText());
         json.addProperty("local", this.jTextFieldLocal.getText());
         json.addProperty("capacidade", this.jTextFieldCapacidade.getText());
         json.addProperty("descricao", this.jTextAreaDesc.getText());
-        json.addProperty("data_inicio", ((JTextField) this.jDateChooserDataInicio.getDateEditor().getUiComponent()).getText()+" "+this.jFormattedTextFieldHoraInicio.getText()+":00");
-        json.addProperty("data_termino", ((JTextField) this.jDateChooserDataInicio.getDateEditor().getUiComponent()).getText()+" "+this.jFormattedTextFieldHoraTermino.getText()+":00");
+        json.addProperty("data_inicio", ((JTextField) this.jDateChooserDataInicio.getDateEditor().getUiComponent()).getText());
+        json.addProperty("data_termino", ((JTextField) this.jDateChooserDataInicio.getDateEditor().getUiComponent()).getText());
+        json.addProperty("horario_inicio", this.jFormattedTextFieldHoraInicio.getText());
+        json.addProperty("horario_termino", this.jFormattedTextFieldHoraTermino.getText());
         new EventoController().insert(json.toString());
         this.dispose();
     }//GEN-LAST:event_jLabelSalvarMouseClicked

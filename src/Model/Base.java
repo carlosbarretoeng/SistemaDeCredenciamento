@@ -32,11 +32,11 @@ public abstract class Base implements Serializable {
     }
 
     public Base jsonToObject(String json) {
-        return new GsonBuilder().registerTypeHierarchyAdapter(Date.class, new DateDeserializer()).create().fromJson(json, this.getClass());
+        return new Gson().fromJson(json, this.getClass());
     }
 
     public String objectToJson() {
-        return new GsonBuilder().registerTypeHierarchyAdapter(Date.class, new DateDeserializer()).create().toJson(this);
+        return new Gson().toJson(this);
     }
     
 }

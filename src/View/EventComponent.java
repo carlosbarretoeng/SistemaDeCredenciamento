@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
 public class EventComponent extends javax.swing.JPanel {
@@ -20,7 +19,7 @@ public class EventComponent extends javax.swing.JPanel {
         this.dados = dados;
         this.jLabelCapacidade.setHorizontalAlignment(SwingConstants.RIGHT);
         this.jLabelDataHora.setHorizontalAlignment(SwingConstants.RIGHT);
-        SimpleDateFormat ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy");
         this.jLabelNome.setText("<html>" + dados.get("nome").getAsString() + "</html>");
         this.jLabelDescricao.setText("<html>" + dados.get("descricao").getAsString() + "</html>");
         this.jLabelDataHora.setText("<html>" + "De " + ddMMyyyy.format(new Date(dados.get("data_inicio").getAsString())) + " até " + ddMMyyyy.format(new Date(dados.get("data_termino").getAsString())) + "</html>");
