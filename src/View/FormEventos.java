@@ -100,7 +100,6 @@ public class FormEventos extends javax.swing.JDialog {
         jLabelDescricao.setForeground(new java.awt.Color(72, 136, 123));
         jLabelDescricao.setText("Descrição");
 
-        jTextAreaDesc.setBackground(new java.awt.Color(255, 255, 255));
         jTextAreaDesc.setColumns(20);
         jTextAreaDesc.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jTextAreaDesc.setForeground(new java.awt.Color(102, 102, 102));
@@ -332,7 +331,7 @@ public class FormEventos extends javax.swing.JDialog {
                     .addComponent(jLabelNome)
                     .addComponent(jLabelId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)

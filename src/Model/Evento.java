@@ -10,8 +10,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@XmlRootElement(name = "Evento")
-@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Evento extends Base {
     
     private String nome, descricao, local;

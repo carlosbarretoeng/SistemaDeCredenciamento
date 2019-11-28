@@ -2,7 +2,6 @@ package Controller;
 
 import DAO.JPAfunctions;
 import Model.Usuario;
-import Util.DataType;
 
 public class UsuarioController extends Controller {
 
@@ -12,11 +11,15 @@ public class UsuarioController extends Controller {
     }
 
     public boolean auth(String login, String senha) {
-        //senha = Encrypt.run(senha);
         return !JPAfunctions.select(Usuario.class, new String[][]{
             {"login", "'" + login + "'"}, {"senha", "'" + senha + "'"}
         }).isEmpty();
-
+    }
+    
+    public Usuario select(String login) {
+        return (Usuario) JPAfunctions.select(Usuario.class, new String[][]{
+            {"login", "'" + login + "'"}
+        }).get(0);
     }
     
 }

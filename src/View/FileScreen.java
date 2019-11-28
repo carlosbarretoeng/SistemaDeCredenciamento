@@ -71,7 +71,7 @@ public class FileScreen extends javax.swing.JDialog {
     private void jFileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooserActionPerformed
         FileScreen.cancel = evt.getActionCommand().equals("CancelSelection");
         try{
-            FileScreen.path = this.jFileChooser.getSelectedFile().getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
+            FileScreen.path = this.jFileChooser.getSelectedFile().getAbsolutePath();
         }
         catch(Exception e) {
         }

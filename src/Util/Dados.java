@@ -5,10 +5,8 @@ import Model.Base;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,7 +43,7 @@ public class Dados {
                 }
             }
         }.select().toString());
-        Arquivo.escrever(caminho + File.separator + classe.getName() + "-" + new Date().toString() + ".json", data);
+        Arquivo.escrever(caminho + "export.json", data);
     }
 
 }

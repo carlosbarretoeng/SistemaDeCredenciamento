@@ -7,8 +7,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity()
-@XmlRootElement(name = "Pessoa")
-@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Pessoa extends Base {
     private String nome, cpf, rg, endereco, cidade, telefone, email;
     private int matricula;
