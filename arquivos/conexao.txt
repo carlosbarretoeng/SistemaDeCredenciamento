@@ -1,4 +1,4 @@
 com.mysql.jdbc.Driver
-jdbc:mysql://localhost:3306/qrevent
-root
+jdbc:mysql://34.95.238.134:3306/qrevent
+franzoni
 123456

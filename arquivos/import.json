@@ -1,4 +1,4 @@
 [
-{"nome":"Game Party","descricao":"Evento de games","local":"Unifagoc","horario_inicio":"13:00","horario_termino":"20:00","capacidade":200,"data_inicio":"Dec 14, 2019 9:00:00 PM","data_termino":"Dec 14, 2019 9:00:00 PM","id":1}, 
-{"nome":"Evento teste","descricao":"Evento criado para testar o funcionamento","local":"Local teste","horario_inicio":"19:00","horario_termino":"22:00","capacidade":1500,"data_inicio":"May 11, 2020 9:00:00 PM","data_termino":"May 11, 2020 9:00:00 PM","id":2}
+{"nome":"Game Party","descricao":"Evento de games","local":"Unifagoc","horario_inicio":"13:00","horario_termino":"20:00","capacidade":200,"data_inicio":"1111-11-11","data_termino":"1111-11-11","id":1}, 
+{"nome":"Evento teste","descricao":"Evento criado para testar o funcionamento","local":"Local teste","horario_inicio":"19:00","horario_termino":"22:00","capacidade":1500,"data_inicio":"1111-11-11","data_termino":"1111-11-11","id":2}
 ]

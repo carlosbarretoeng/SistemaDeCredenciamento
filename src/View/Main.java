@@ -203,7 +203,7 @@ public class Main extends javax.swing.JFrame {
         jPanelScrollEventos.setLayout(jPanelScrollEventosLayout);
         jPanelScrollEventosLayout.setHorizontalGroup(
             jPanelScrollEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 688, Short.MAX_VALUE)
+            .addGap(0, 876, Short.MAX_VALUE)
         );
         jPanelScrollEventosLayout.setVerticalGroup(
             jPanelScrollEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,17 +230,19 @@ public class Main extends javax.swing.JFrame {
         jPanelEventos.setLayout(jPanelEventosLayout);
         jPanelEventosLayout.setHorizontalGroup(
             jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelEventosLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEventosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelEventosLayout.createSequentialGroup()
                         .addComponent(jLabelEventos)
-                        .addGap(525, 525, 525)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelAddEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelReloadEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 14, Short.MAX_VALUE))
+                    .addGroup(jPanelEventosLayout.createSequentialGroup()
+                        .addGap(0, 8, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
         );
         jPanelEventosLayout.setVerticalGroup(
             jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +253,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabelReloadEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelAddEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                .addComponent(jScrollPaneEventos, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
