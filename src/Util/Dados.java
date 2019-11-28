@@ -43,7 +43,7 @@ public class Dados {
                 }
             }
         }.select().toString());
-        Arquivo.escrever(caminho + "export.json", data);
+        Arquivo.escrever(caminho + "//export.json", data);
     }
 
 }
