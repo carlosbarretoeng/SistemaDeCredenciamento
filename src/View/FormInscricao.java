@@ -23,6 +23,7 @@ public class FormInscricao extends javax.swing.JFrame {
     public FormInscricao() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -47,7 +48,7 @@ public class FormInscricao extends javax.swing.JFrame {
         jLabelStatusEvento = new javax.swing.JLabel();
         jLabelStatusPessoa = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Formulário de inscrição");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -164,10 +165,6 @@ public class FormInscricao extends javax.swing.JFrame {
             }
         });
 
-        jLabelStatusEvento.setIcon(new javax.swing.ImageIcon("D:\\NetbeansProjects\\SistemaDeCredenciamento\\icones\\error.png")); // NOI18N
-
-        jLabelStatusPessoa.setIcon(new javax.swing.ImageIcon("D:\\NetbeansProjects\\SistemaDeCredenciamento\\icones\\error.png")); // NOI18N
-
         javax.swing.GroupLayout jPanelBGLayout = new javax.swing.GroupLayout(jPanelBG);
         jPanelBG.setLayout(jPanelBGLayout);
         jPanelBGLayout.setHorizontalGroup(
@@ -176,9 +173,9 @@ public class FormInscricao extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelBGLayout.createSequentialGroup()
-                        .addComponent(jLabelInscrever, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelInscrever, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanelUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelBGLayout.createSequentialGroup()
@@ -201,7 +198,7 @@ public class FormInscricao extends javax.swing.JFrame {
                             .addComponent(jTextFieldEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jTextFieldEventoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanelBGLayout.setVerticalGroup(
             jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,9 +227,9 @@ public class FormInscricao extends javax.swing.JFrame {
                 .addComponent(jPanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelInscrever, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(jLabelCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInscrever, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,6 +296,20 @@ public class FormInscricao extends javax.swing.JFrame {
             return;
         }
         
+        JsonObject pessoa = new JsonObject();
+        pessoa.addProperty("id", this.jTextFieldPessoa.getText());
+        JsonObject usuario = new JsonObject();
+        usuario.addProperty("id", AuthService.usuario.getId());
+        JsonObject evento = new JsonObject();
+        evento.addProperty("id", this.jTextFieldEvento.getText());
+        JsonObject inscricao = new JsonObject();
+        inscricao.add("pessoa", pessoa); 
+        inscricao.add("evento", evento);
+        inscricao.add("usuario", usuario);
+        inscricao.addProperty("data", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        
+        new InscricaoController().insert(inscricao.toString());
+        this.dispose();
     }//GEN-LAST:event_jLabelInscreverMouseClicked
 
     public static void main(String args[]) {

@@ -297,19 +297,17 @@ public class Main extends javax.swing.JFrame {
         jPanelPessoas.setLayout(jPanelPessoasLayout);
         jPanelPessoasLayout.setHorizontalGroup(
             jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelPessoasLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPessoasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelPessoasLayout.createSequentialGroup()
-                        .addComponent(jScrollPanePessoas, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
-                        .addContainerGap())
+                .addGroup(jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPanePessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanelPessoasLayout.createSequentialGroup()
                         .addComponent(jLabelPessoas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 720, Short.MAX_VALUE)
                         .addComponent(jLabelAddPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelReloadPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                        .addComponent(jLabelReloadPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
         );
         jPanelPessoasLayout.setVerticalGroup(
             jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,6 +333,11 @@ public class Main extends javax.swing.JFrame {
         jLabelReloadInscricoes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelAddInscricoes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAddInscricoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAddInscricoesMouseClicked(evt);
+            }
+        });
 
         jScrollPaneInscricoes.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPaneInscricoes.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -346,7 +349,7 @@ public class Main extends javax.swing.JFrame {
         jPanelScrollInscricoes.setLayout(jPanelScrollInscricoesLayout);
         jPanelScrollInscricoesLayout.setHorizontalGroup(
             jPanelScrollInscricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGap(0, 899, Short.MAX_VALUE)
         );
         jPanelScrollInscricoesLayout.setVerticalGroup(
             jPanelScrollInscricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1227,6 +1230,10 @@ public class Main extends javax.swing.JFrame {
         new FormPessoa(this, true).setVisible(true);
         fillData("Model.Pessoa", PessoaComponent.class, this.jPanelScrollPessoas);
     }//GEN-LAST:event_jLabelAddPessoasMouseClicked
+
+    private void jLabelAddInscricoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddInscricoesMouseClicked
+        new FormInscricao().setVisible(true);
+    }//GEN-LAST:event_jLabelAddInscricoesMouseClicked
 
     public void fillData(String className, Class componentClass, JPanel scrollPanel) {
         scrollPanel.removeAll();
