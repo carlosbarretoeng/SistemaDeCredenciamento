@@ -1,6 +1,6 @@
 package Model;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -20,11 +20,11 @@ public abstract class Base implements Serializable {
     }
 
     public Base jsonToObject(String json) {
-        return new Gson().fromJson(json, this.getClass());
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(json, this.getClass());
     }
 
     public String objectToJson() {
-        return new Gson().toJson(this);
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(this);
     }
     
 }
