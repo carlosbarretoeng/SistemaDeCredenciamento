@@ -6,7 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,7 +45,7 @@ public class Dados {
                 }
             }
         }.select().toString());
-        Arquivo.escrever(caminho + "//export.json", data);
+        Arquivo.escrever(caminho + "//export-" + classe.getSimpleName() + "-" + new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".json", data);
     }
 
 }

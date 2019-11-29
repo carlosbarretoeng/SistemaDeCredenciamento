@@ -11,6 +11,7 @@ import Model.Inscricao;
 import Model.Pessoa;
 import Model.Usuario;
 import Util.Arquivo;
+import Util.Conexao;
 import Util.Dados;
 import Util.DataType;
 import Util.Relogio;
@@ -37,11 +38,16 @@ import javax.swing.JRootPane;
 public class Main extends javax.swing.JFrame {
 
     public Main() {
-        
-        this.setConnection();
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         initComponents();
+        Conexao con = Conexao.get();
+        if(!con.testar()) {
+            new Configuracao(this, true).setVisible(true);
+        }
+        else {
+            con.configurar();
+        }
         this.setLayouts();
         this.getContentPane().setBackground(Color.white);
         new Dragged(this.jPanelDragged, this);
@@ -53,40 +59,8 @@ public class Main extends javax.swing.JFrame {
         }
         catch(Exception e) {
             System.out.println(e);
-            new Configuracao().setVisible(true);
-            if(!Configuracao.testarConexao(getConnection())) {
-                System.exit(0);
-            }
         }
         new Relogio(jLabelRelogio);
-    }
-    
-    public void setConnection() {
-        ArrayList con = this.getConnection();
-        if(Configuracao.testarConexao(con)) {
-            HashMap propriedades = new HashMap<String, String>();
-            propriedades.put("javax.persistence.jdbc.driver", con.get(0));
-            propriedades.put("javax.persistence.jdbc.url", con.get(1));
-            propriedades.put("javax.persistence.jdbc.user", con.get(2));
-            propriedades.put("javax.persistence.jdbc.password", con.get(3));
-            JPAfactory.configurar(propriedades);
-        }
-        else {
-            new Configuracao().setVisible(true);
-            if(!Configuracao.testarConexao(con)) {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao conectar", "Conexão inválida", 0, new ImageIcon("icones//error.png"));
-                System.exit(0);
-            }
-        }
-    }
-    
-    public ArrayList getConnection() {
-        try {
-            return Arquivo.ler("arquivos//conexao.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
     }
     
     public void setIcons() {
@@ -988,7 +962,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jLabelConfigDatabaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelConfigDatabaseMouseClicked
         this.jPanelSubConfigBG.setVisible(false);
-        new Configuracao().setVisible(true);
+        new Configuracao(this, true).setVisible(true);
     }//GEN-LAST:event_jLabelConfigDatabaseMouseClicked
 
     private void jLabelLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogoutMouseClicked

@@ -2,7 +2,6 @@ package View;
 
 import Util.DataType;
 import java.io.File;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileScreen extends javax.swing.JDialog {

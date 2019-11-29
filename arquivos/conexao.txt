@@ -1,4 +1,0 @@
-com.mysql.jdbc.Driver
-jdbc:mysql://localhost:3306/qrevent
-root
-123456

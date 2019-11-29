@@ -2,7 +2,7 @@ package View;
 
 import DAO.JPAfactory;
 import Util.Arquivo;
-import java.awt.Image;
+import Util.Conexao;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,9 +13,10 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class Configuracao extends javax.swing.JFrame {
-
-    public Configuracao() {
+public class Configuracao extends javax.swing.JDialog {
+    
+    public Configuracao(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -25,14 +26,6 @@ public class Configuracao extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelBG = new javax.swing.JPanel();
-        jLabelDriver = new javax.swing.JLabel();
-        jLabelURL = new javax.swing.JLabel();
-        jLabelUsuario = new javax.swing.JLabel();
-        jLabelSenha = new javax.swing.JLabel();
-        jComboBoxDriver = new javax.swing.JComboBox<>();
-        jTextFieldUsuario = new javax.swing.JTextField();
-        jButtonConfigurar = new javax.swing.JButton();
-        jPasswordFieldSenha = new javax.swing.JPasswordField();
         jPanelURL = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldIp = new javax.swing.JTextField();
@@ -42,32 +35,23 @@ public class Configuracao extends javax.swing.JFrame {
         jTextFieldNomeDoBanco = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaUrl = new javax.swing.JTextArea();
+        jLabelDriver = new javax.swing.JLabel();
+        jLabelUsuario = new javax.swing.JLabel();
+        jLabelURL = new javax.swing.JLabel();
+        jLabelSenha = new javax.swing.JLabel();
+        jComboBoxDriver = new javax.swing.JComboBox<String>();
+        jTextFieldUsuario = new javax.swing.JTextField();
+        jButtonConfigurar = new javax.swing.JButton();
+        jPasswordFieldSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanelBG.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabelDriver.setText("Driver");
-
-        jLabelURL.setText("URL");
-
-        jLabelUsuario.setText("Usuário");
-
-        jLabelSenha.setText("Senha");
-
-        jComboBoxDriver.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "com.mysql.jdbc.Driver" }));
-
-        jTextFieldUsuario.setText("root");
-
-        jButtonConfigurar.setText("Configurar");
-        jButtonConfigurar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfigurarActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
-        jPasswordFieldSenha.setText("123456");
+        jPanelBG.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanelURL.setBackground(new java.awt.Color(255, 255, 255));
         jPanelURL.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -122,7 +106,7 @@ public class Configuracao extends javax.swing.JFrame {
                                     .addGroup(jPanelURLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel2)
                                         .addComponent(jTextFieldPorta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelURLLayout.setVerticalGroup(
@@ -145,12 +129,33 @@ public class Configuracao extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabelDriver.setText("Driver");
+
+        jLabelUsuario.setText("Usuário");
+
+        jLabelURL.setText("URL");
+
+        jLabelSenha.setText("Senha");
+
+        jComboBoxDriver.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "com.mysql.jdbc.Driver" }));
+
+        jTextFieldUsuario.setText("root");
+
+        jButtonConfigurar.setText("Configurar");
+        jButtonConfigurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfigurarActionPerformed(evt);
+            }
+        });
+
+        jPasswordFieldSenha.setText("123456");
+
         javax.swing.GroupLayout jPanelBGLayout = new javax.swing.GroupLayout(jPanelBG);
         jPanelBG.setLayout(jPanelBGLayout);
         jPanelBGLayout.setHorizontalGroup(
             jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBGLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(30, 30, 30)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelDriver)
                     .addComponent(jLabelURL)
@@ -160,13 +165,13 @@ public class Configuracao extends javax.swing.JFrame {
                     .addComponent(jTextFieldUsuario)
                     .addComponent(jButtonConfigurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelURL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxDriver, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(jComboBoxDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanelBGLayout.setVerticalGroup(
             jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBGLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabelDriver)
                 .addGap(2, 2, 2)
                 .addComponent(jComboBoxDriver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,16 +189,14 @@ public class Configuracao extends javax.swing.JFrame {
                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelBG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanelBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,44 +208,32 @@ public class Configuracao extends javax.swing.JFrame {
 
     private void jButtonConfigurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfigurarActionPerformed
 
-        HashMap propriedades = new HashMap<String, String>();
-        propriedades.put("javax.persistence.jdbc.driver", this.jComboBoxDriver.getSelectedItem().toString());
-        propriedades.put("javax.persistence.jdbc.url", this.jTextAreaUrl.getText());
-        propriedades.put("javax.persistence.jdbc.user", this.jTextFieldUsuario.getText());
-        propriedades.put("javax.persistence.jdbc.password", new String(this.jPasswordFieldSenha.getPassword()));
+        Conexao con = new Conexao(
+            this.jComboBoxDriver.getSelectedItem().toString(), 
+            this.jTextFieldIp.getText(), 
+            this.jTextFieldPorta.getText(), 
+            this.jTextFieldUsuario.getText(),
+            new String(this.jPasswordFieldSenha.getPassword()),
+            this.jTextFieldNomeDoBanco.getText()
+        );
 
-        ArrayList conexao = new ArrayList();
-        conexao.add(this.jComboBoxDriver.getSelectedItem().toString());
-        conexao.add(this.jTextAreaUrl.getText());
-        conexao.add(this.jTextFieldUsuario.getText());
-        conexao.add(new String(this.jPasswordFieldSenha.getPassword()));
-        
-        if(!this.testarConexao(conexao)) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao conectar", "Conexão inválida", 0, new ImageIcon("icones//error.png"));
-            return;
-        }
-
-        try {
-            Arquivo.escrever("arquivos//conexao.txt", conexao);
-            JPAfactory.configurar(propriedades);
-            JOptionPane.showMessageDialog(rootPane, "Configuração de conexão salva com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+        if(con.testar()) {
+            con.configurar();
+            con.salvar();
             this.dispose();
-        } 
-        catch (IOException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao escrever arquivo!", "Erro", 0, new ImageIcon("icones//error.png"));
         }
-        
+        else {
+            JOptionPane.showMessageDialog(null, "Erro ao estabelecer conexao!", "Error", 0, new ImageIcon("icones//error.png"));
+        }
     }//GEN-LAST:event_jButtonConfigurarActionPerformed
 
-    public static boolean testarConexao(ArrayList<String> conexao) {
-        try {
-            Class.forName((String) conexao.get(0));
-            DriverManager.getConnection(conexao.get(1), conexao.get(2), conexao.get(3));
-        } 
-        catch (ClassNotFoundException | SQLException e) {
-            return false;
-        }
-        return true;
+    public void updateUrl() {
+        this.jTextAreaUrl.setText(
+                "jdbc:mysql://"
+                + this.jTextFieldIp.getText() + ":"
+                + this.jTextFieldPorta.getText() + "/"
+                + this.jTextFieldNomeDoBanco.getText()
+        );
     }
 
     private void jTextFieldIpCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldIpCaretUpdate
@@ -257,15 +248,14 @@ public class Configuracao extends javax.swing.JFrame {
         this.updateUrl();
     }//GEN-LAST:event_jTextFieldNomeDoBancoCaretUpdate
 
-    public void updateUrl() {
-        this.jTextAreaUrl.setText(
-                "jdbc:mysql://"
-                + this.jTextFieldIp.getText() + ":"
-                + this.jTextFieldPorta.getText() + "/"
-                + this.jTextFieldNomeDoBanco.getText()
-        );
-    }
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(!Conexao.get().testar()) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -289,11 +279,19 @@ public class Configuracao extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Configuracao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Configuracao().setVisible(true);
+                Configuracao dialog = new Configuracao(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

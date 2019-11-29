@@ -201,7 +201,7 @@
                           <Component id="jScrollPanePessoas" pref="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="jLabelPessoas" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="720" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabelAddPessoas" min="-2" pref="40" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabelReloadPessoas" min="-2" pref="40" max="-2" attributes="0"/>
@@ -424,7 +424,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jScrollPaneUsuarios" pref="918" max="32767" attributes="0"/>
+                              <Component id="jScrollPaneUsuarios" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -1190,8 +1190,8 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="1"/>
-                <Property name="rows" type="int" value="2"/>
                 <Property name="verticalGap" type="int" value="10"/>
+                <Property name="rows" type="int" value="2"/>
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabelLogout">

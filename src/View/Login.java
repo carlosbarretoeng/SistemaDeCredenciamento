@@ -3,13 +3,8 @@ package View;
 
 import Controller.UsuarioController;
 import DAO.JPAfactory;
-import Util.Arquivo;
 import Util.AuthService;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Util.Conexao;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -18,41 +13,15 @@ public class Login extends javax.swing.JFrame {
     private final UsuarioController usuarioController = new UsuarioController();
     
     public Login() {
+        if(!Conexao.get().testar()) {
+            new Configuracao(this, true).setVisible(true);
+        }
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setConnection();
         JPAfactory.getManager();
         this.jLabelQRevent.setIcon(new ImageIcon("icones//logo-verde.png"));
     }
 
-    public ArrayList getConnection() {
-        try {
-            return Arquivo.ler("arquivos//conexao.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-    
-    public void setConnection() {
-        ArrayList con = this.getConnection();
-        if(Configuracao.testarConexao(con)) {
-            HashMap propriedades = new HashMap<String, String>();
-            propriedades.put("javax.persistence.jdbc.driver", con.get(0));
-            propriedades.put("javax.persistence.jdbc.url", con.get(1));
-            propriedades.put("javax.persistence.jdbc.user", con.get(2));
-            propriedades.put("javax.persistence.jdbc.password", con.get(3));
-            JPAfactory.configurar(propriedades);
-        }
-        else {
-            new Configuracao().setVisible(true);
-            if(!Configuracao.testarConexao(con)) {
-                JOptionPane.showMessageDialog(rootPane, "Erro ao conectar", "Conexão inválida", 0, new ImageIcon("icones//error.png"));
-                System.exit(0);
-            }
-        }
-    }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
