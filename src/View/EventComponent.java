@@ -16,13 +16,14 @@ public class EventComponent extends javax.swing.JPanel {
     public EventComponent(JsonObject dados, Main parent) {
         this.parent = parent;
         initComponents();
+        System.out.println(dados);
         this.dados = dados;
         this.jLabelCapacidade.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.jLabelDataHora.setHorizontalAlignment(SwingConstants.RIGHT);
-        SimpleDateFormat ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        this.jLabelHora.setHorizontalAlignment(SwingConstants.RIGHT);
         this.jLabelNome.setText("<html>" + dados.get("nome").getAsString() + "</html>");
         this.jLabelDescricao.setText("<html>" + dados.get("descricao").getAsString() + "</html>");
-        this.jLabelDataHora.setText("<html>" + "De " + ddMMyyyy.format(new Date(dados.get("data_inicio").getAsString())) + " até " + ddMMyyyy.format(new Date(dados.get("data_termino").getAsString())) + "</html>");
+        this.jLabelHora.setText("<html> das " + dados.get("horario_inicio").getAsString() + "h até " + dados.get("horario_termino").getAsString() + "</html>");
+        this.jLabelData.setText("<html>" + "De " + dados.get("data_inicio").getAsString() + " até " + dados.get("data_termino").getAsString());
         this.jLabelCapacidade.setText("<html>" + "Com capacidade para " + dados.get("capacidade").getAsString() + " pessoas" + "</html>");
         this.jLabelLocal.setText("<html>" + "Local: " + dados.get("local").getAsString() + "</html>");
         this.jLabelExcluir.setIcon(new ImageIcon("icones//error.png"));
@@ -32,20 +33,22 @@ public class EventComponent extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelDataHora = new javax.swing.JLabel();
+        jLabelHora = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
         jLabelDescricao = new javax.swing.JLabel();
         jLabelCapacidade = new javax.swing.JLabel();
         jLabelLocal = new javax.swing.JLabel();
         jLabelExcluir = new javax.swing.JLabel();
         jLabelExcluir1 = new javax.swing.JLabel();
+        jLabelData = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabelDataHora.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabelDataHora.setForeground(new java.awt.Color(51, 51, 51));
-        jLabelDataHora.setText("Data e hora");
+        jLabelHora.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelHora.setForeground(new java.awt.Color(51, 51, 51));
+        jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelHora.setText("Data e hora");
 
         jLabelNome.setFont(new java.awt.Font("Calibri Light", 1, 24)); // NOI18N
         jLabelNome.setForeground(new java.awt.Color(72, 136, 123));
@@ -88,12 +91,22 @@ public class EventComponent extends javax.swing.JPanel {
             }
         });
 
+        jLabelData.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        jLabelData.setForeground(new java.awt.Color(153, 51, 255));
+        jLabelData.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelData.setText("Data e hora");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -101,20 +114,16 @@ public class EventComponent extends javax.swing.JPanel {
                     .addComponent(jLabelCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelDataHora)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelHora)
+                    .addComponent(jLabelData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -145,10 +154,11 @@ public class EventComponent extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelCapacidade;
-    private javax.swing.JLabel jLabelDataHora;
+    private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelExcluir;
     private javax.swing.JLabel jLabelExcluir1;
+    private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelLocal;
     private javax.swing.JLabel jLabelNome;
     // End of variables declaration//GEN-END:variables

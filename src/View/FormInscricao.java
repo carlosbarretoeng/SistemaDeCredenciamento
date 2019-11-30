@@ -4,19 +4,16 @@ package View;
 import Controller.EventoController;
 import Controller.InscricaoController;
 import Controller.PessoaController;
-import Controller.UsuarioController;
 import Model.Evento;
 import Model.Pessoa;
-import Model.Usuario;
 import Util.AuthService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.parser.JSONParser;
 
 public class FormInscricao extends javax.swing.JFrame {
 
@@ -297,17 +294,19 @@ public class FormInscricao extends javax.swing.JFrame {
         }
         
         JsonObject pessoa = new JsonObject();
-        pessoa.addProperty("id", this.jTextFieldPessoa.getText());
+        pessoa.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldPessoa.getText())));
         JsonObject usuario = new JsonObject();
-        usuario.addProperty("id", AuthService.usuario.getId());
+        usuario.add("id", new JsonPrimitive(AuthService.usuario.getId()));
         JsonObject evento = new JsonObject();
-        evento.addProperty("id", this.jTextFieldEvento.getText());
+        evento.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldEvento.getText())));
         JsonObject inscricao = new JsonObject();
+        inscricao.add("id", new JsonPrimitive(0));
         inscricao.add("pessoa", pessoa); 
         inscricao.add("evento", evento);
         inscricao.add("usuario", usuario);
         inscricao.addProperty("data", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        
+        inscricao.addProperty("horario", new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        System.out.println(inscricao.toString());
         new InscricaoController().insert(inscricao.toString());
         this.dispose();
     }//GEN-LAST:event_jLabelInscreverMouseClicked

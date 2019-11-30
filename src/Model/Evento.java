@@ -1,19 +1,20 @@
 
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Evento extends Base {
     
     private String nome, descricao, local;
     private int capacidade;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date data_inicio, data_termino;
-    private String hora_inicio, hora_termino;
+    private String horario_inicio, horario_termino;
 
     public Evento() {
     }

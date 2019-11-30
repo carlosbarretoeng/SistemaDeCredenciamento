@@ -2,15 +2,13 @@
 package View;
 
 import Controller.Controller;
-import Controller.EventoController;
-import DAO.JPAfactory;
 import Layouts.WrapLayout;
 import Model.Base;
 import Model.Evento;
 import Model.Inscricao;
 import Model.Pessoa;
 import Model.Usuario;
-import Util.Arquivo;
+import Util.AuthService;
 import Util.Conexao;
 import Util.Dados;
 import Util.DataType;
@@ -22,10 +20,7 @@ import java.awt.Component;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -38,6 +33,8 @@ import javax.swing.JRootPane;
 public class Main extends javax.swing.JFrame {
 
     public Main() {
+        AuthService.usuario = new Usuario();
+        AuthService.usuario.setId(1);
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         initComponents();

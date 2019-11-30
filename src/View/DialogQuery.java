@@ -18,6 +18,7 @@ public class DialogQuery extends javax.swing.JDialog {
     public DialogQuery(java.awt.Frame parent, boolean modal, String[] meta, ArrayList<String> data, Class class_) {
         super(parent, modal);
         initComponents();
+        System.out.println(data);
         DialogQuery.id = "-";
         this.setLocationRelativeTo(null);
         DefaultTableModel model = new DefaultTableModel();

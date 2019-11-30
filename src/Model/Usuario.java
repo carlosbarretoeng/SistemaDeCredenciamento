@@ -5,15 +5,9 @@ import javax.persistence.Entity;
 
 @Entity()
 public class Usuario extends Base {
+    
     private String nome, login, senha, tipo;
-
-    public Usuario(String nome, String login, String senha, String tipo) {
-        this.nome = nome;
-        this.login = login;
-        this.senha = senha;
-        this.tipo = tipo;
-    }
-
+    
     public Usuario() {
     }
 

@@ -2,6 +2,22 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/Controller/EventoController.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/Controller/Controller.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/View/Login.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/View/DialogQuery.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/View/Configuracao.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/Util/Arquivo.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/View/Main.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/View/EventComponent.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/Model/Base.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/Util/Dados.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/Model/Evento.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/View/FileScreen.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/View/FormInscricao.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/Util/Conexao.java</file>
+            <file>file:/D:/NetbeansProjects/SistemaDeCredenciamento/src/META-INF/persistence.xml</file>
+        </group>
     </open-files>
 </project-private>

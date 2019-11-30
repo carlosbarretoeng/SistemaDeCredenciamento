@@ -13,8 +13,12 @@ public class Login extends javax.swing.JFrame {
     private final UsuarioController usuarioController = new UsuarioController();
     
     public Login() {
-        if(!Conexao.get().testar()) {
+        Conexao con = Conexao.get();
+        if(!con.testar()) {
             new Configuracao(this, true).setVisible(true);
+        }
+        else {
+            con.configurar();
         }
         initComponents();
         this.setLocationRelativeTo(null);
