@@ -1,9 +1,7 @@
 
 package Model;
 
-import java.util.ArrayList;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 @Entity()
 public class Pessoa extends Base {

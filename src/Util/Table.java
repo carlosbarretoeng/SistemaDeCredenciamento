@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -28,20 +29,20 @@ public class Table {
         for(String json: data) {
             JsonElement element = new Gson().fromJson(json, JsonObject.class);
             JsonObject array = element.getAsJsonObject();
-            String[] line = new String[fields.length+1];
-            line[0] = array.get("id").toString();
+            ArrayList<String> line = new ArrayList<>();
+            line.add(array.get("id").toString());
             for(int i=0; i<fields.length; i++) {
                 if(array.get(fields[i].getName()) instanceof JsonObject) {
-                    line[i+1] = new Gson().fromJson(array.get(fields[i].getName()), JsonObject.class).get("id").getAsString();
+                    line.add(new Gson().fromJson(array.get(fields[i].getName()), JsonObject.class).get("id").getAsString());
                 }
                 else if(array.get(fields[i].getName()) instanceof JsonArray) {
-                    line[i+1] = String.valueOf(array.get(fields[i].getName()).getAsJsonArray().size());
+                    line.add(String.valueOf(array.get(fields[i].getName()).getAsJsonArray().size()));
                 }
                 else {
-                    line[i+1] = array.get(fields[i].getName()).getAsString();
+                    line.add(array.get(fields[i].getName()).getAsString());
                 }
             }
-            modelo.addRow(line);
+            modelo.addRow(line.toArray());
         }
         table.setModel(modelo);
         if (table.getRowCount() > 0)
@@ -56,9 +57,24 @@ public class Table {
     }
     
     public static void filter(JTable table, String txt, int column){
-        try{
-            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>((DefaultTableModel) table.getModel()); 
+        try {
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>((DefaultTableModel) table.getModel()); 
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txt + "(i?)", column));
+            table.setRowSorter(sorter);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public static void filterAnd(JTable table, String[] txts, int[] columns){
+        try {
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>((DefaultTableModel) table.getModel()); 
+            List<RowFilter> filters = new ArrayList<>();
+            for(int i=0; i<txts.length; i++) {
+                filters.add(RowFilter.regexFilter("(?i)" + txts[i] + "(i?)", columns[i]));
+            }
+            sorter.setRowFilter(RowFilter.andFilter((Iterable) filters));
             table.setRowSorter(sorter);
         }
         catch(Exception e){

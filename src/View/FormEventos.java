@@ -18,6 +18,8 @@ import javax.swing.KeyStroke;
 
 public class FormEventos extends javax.swing.JDialog {
 
+    public static boolean cancel = true;
+    
     public FormEventos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -25,6 +27,7 @@ public class FormEventos extends javax.swing.JDialog {
         this.jLabelSalvar.setIcon(new ImageIcon("icones//success.png"));
         this.jLabelCancelar.setIcon(new ImageIcon("icones//error.png"));
         setEnterEvent();
+        cancel = true;
         this.jTextFieldNome.requestFocus();
         this.setLocationRelativeTo(null);
     }
@@ -33,6 +36,7 @@ public class FormEventos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setEnterEvent();
+        cancel = true;
         this.jLabelSalvar.setIcon(new ImageIcon("icones//success.png"));
         this.jLabelCancelar.setIcon(new ImageIcon("icones//error.png"));
         SimpleDateFormat ddMMyyyy = new SimpleDateFormat("yyyy-MM-dd");
@@ -427,10 +431,12 @@ public class FormEventos extends javax.swing.JDialog {
         json.addProperty("horario_inicio", this.jFormattedTextFieldHoraInicio.getText());
         json.addProperty("horario_termino", this.jFormattedTextFieldHoraTermino.getText());
         new EventoController().insert(json.toString());
+        cancel = false;
         this.dispose();
     }//GEN-LAST:event_jLabelSalvarMouseClicked
 
     private void jLabelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseClicked
+        cancel = true;
         this.dispose();
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 

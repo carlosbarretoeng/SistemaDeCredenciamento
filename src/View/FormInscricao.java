@@ -13,6 +13,7 @@ import com.google.gson.JsonPrimitive;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 public class FormInscricao extends javax.swing.JFrame {
@@ -244,7 +245,7 @@ public class FormInscricao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelEventoQueryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventoQueryMouseClicked
-        new DialogQuery(this, true, new String[]{"id", "nome", "descricao", "data_inicio", "data_termino", "capacidade"} , new EventoController().select(), Evento.class).setVisible(true);
+        new DialogQuery(this, true, new String[]{"id", "nome", "descricao", "local", "capacidade", "data_inicio", "data_termino", "horario_inicio", "horario_termino"} , new EventoController().select(), Evento.class).setVisible(true);
         this.jTextFieldEvento.setText(DialogQuery.id);
         if(DialogQuery.id.equals("-")) {
             this.jLabelStatusEvento.setIcon(new ImageIcon("icones//error.png"));

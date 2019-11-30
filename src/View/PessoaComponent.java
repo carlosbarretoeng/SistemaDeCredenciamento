@@ -4,20 +4,17 @@ package View;
 import com.google.gson.JsonObject;
 
 public class PessoaComponent extends javax.swing.JPanel {
-
-    JsonObject json = null;
     
-    public PessoaComponent(JsonObject json, Main parent) {
-        this.json = json;
+    public PessoaComponent(JsonObject json) {
         initComponents();
-        this.jLabelNome.setText(this.json.get("nome").getAsString());
-        this.jLabelMatricula.setText("Matrícula: " + this.json.get("matricula").getAsString());
-        this.jLabelCidade.setText("Cidade: " + this.json.get("cidade").getAsString());
-        this.jLabelCpf.setText("CPF: " + this.json.get("cpf").getAsString());
-        this.jLabelEmail.setText("Email: " + this.json.get("email").getAsString());
-        this.jLabelEndereco.setText("Endereço: " + this.json.get("endereco").getAsString());
-        this.jLabelRG.setText("RG: " + this.json.get("rg").getAsString());
-        this.jLabelTelefone.setText("Telefone: " + this.json.get("telefone").getAsString());
+        this.jLabelNome.setText(json.get("nome").getAsString());
+        this.jLabelMatricula.setText("Matrícula: " + json.get("matricula").getAsString());
+        this.jLabelCidade.setText("Cidade: " + json.get("cidade").getAsString());
+        this.jLabelCpf.setText("CPF: " + json.get("cpf").getAsString());
+        this.jLabelEmail.setText("Email: " + json.get("email").getAsString());
+        this.jLabelEndereco.setText("Endereço: " + json.get("endereco").getAsString());
+        this.jLabelRG.setText("RG: " + json.get("rg").getAsString());
+        this.jLabelTelefone.setText("Telefone: " + json.get("telefone").getAsString());
     }
 
     @SuppressWarnings("unchecked")
@@ -93,7 +90,7 @@ public class PessoaComponent extends javax.swing.JPanel {
         jPanelBGLayout.setVerticalGroup(
             jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBGLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelMatricula)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelNome)

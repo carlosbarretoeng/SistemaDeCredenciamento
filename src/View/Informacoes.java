@@ -171,7 +171,7 @@ public class Informacoes extends javax.swing.JDialog {
         jComboBoxFiltro.setBackground(new java.awt.Color(45, 45, 45));
         jComboBoxFiltro.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jComboBoxFiltro.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "id", "nome", "descrição", "data_inicio", "data_termino", "capacidade", "horario_inicio", "horario_termino" }));
+        jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "id", "nome", "descrição", "local", "capacidade", "data_inicio", "data_termino", "horario_inicio", "horario_termino" }));
         jComboBoxFiltro.setOpaque(false);
 
         jTextFieldFiltro.setBackground(new java.awt.Color(45, 45, 45));
