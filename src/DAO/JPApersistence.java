@@ -26,6 +26,10 @@ public class JPApersistence <T extends Base> {
         return (T)obj;
     }
     
+    public int quantidade() {
+        return JPAfunctions.selectAmount(classePersistente);
+    }
+    
     public List<T> recuperar(){
         return (List<T>) JPAfunctions.select(classePersistente);
     }

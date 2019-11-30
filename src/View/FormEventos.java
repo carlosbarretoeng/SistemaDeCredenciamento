@@ -40,15 +40,14 @@ public class FormEventos extends javax.swing.JDialog {
         this.jTextFieldNome.setText(dados.get("nome").getAsString());
         this.jTextAreaDesc.setText(dados.get("descricao").getAsString());
         this.jTextFieldLocal.setText(dados.get("local").getAsString());
-        System.out.println(dados.get("data_inicio").getAsString());
         try {
-            this.jDateChooserDataInicio.setDate(new Date(dados.get("data_inicio").getAsString()));
-            this.jDateChooserDataTermino.setDate(new Date(dados.get("data_termino").getAsString()));
+            this.jDateChooserDataInicio.setDate(ddMMyyyy.parse(dados.get("data_inicio").getAsString()));
+            this.jDateChooserDataTermino.setDate(ddMMyyyy.parse(dados.get("data_termino").getAsString()));
         } catch (Exception ex) {
             Logger.getLogger(FormEventos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.jFormattedTextFieldHoraInicio.setText(dados.get("hora_inicio").getAsString());
-        this.jFormattedTextFieldHoraTermino.setText(dados.get("hora_termino").getAsString());
+        this.jFormattedTextFieldHoraInicio.setText(dados.get("horario_inicio").getAsString());
+        this.jFormattedTextFieldHoraTermino.setText(dados.get("horario_termino").getAsString());
         this.jTextFieldCapacidade.setText(dados.get("capacidade").getAsString());
         this.setLocationRelativeTo(null);
     }
@@ -276,6 +275,11 @@ public class FormEventos extends javax.swing.JDialog {
         jLabelCancelar.setForeground(new java.awt.Color(204, 51, 0));
         jLabelCancelar.setText("  Cancelar");
         jLabelCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCancelarMouseClicked(evt);
+            }
+        });
 
         jLabelSalvar.setBackground(new java.awt.Color(255, 255, 255));
         jLabelSalvar.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -420,11 +424,15 @@ public class FormEventos extends javax.swing.JDialog {
         json.addProperty("descricao", this.jTextAreaDesc.getText());
         json.addProperty("data_inicio", ((JTextField) this.jDateChooserDataInicio.getDateEditor().getUiComponent()).getText());
         json.addProperty("data_termino", ((JTextField) this.jDateChooserDataTermino.getDateEditor().getUiComponent()).getText());
-        json.addProperty("hora_inicio", this.jFormattedTextFieldHoraInicio.getText());
-        json.addProperty("hora_termino", this.jFormattedTextFieldHoraTermino.getText());
+        json.addProperty("horario_inicio", this.jFormattedTextFieldHoraInicio.getText());
+        json.addProperty("horario_termino", this.jFormattedTextFieldHoraTermino.getText());
         new EventoController().insert(json.toString());
         this.dispose();
     }//GEN-LAST:event_jLabelSalvarMouseClicked
+
+    private void jLabelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

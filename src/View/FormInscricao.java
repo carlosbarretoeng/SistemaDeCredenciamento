@@ -279,8 +279,8 @@ public class FormInscricao extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.jLabelUsuarioNome.setText("Nome: " + AuthService.usuario.getNome());
-        this.jLabelUsuarioId.setText("ID: " + String.valueOf(AuthService.usuario.getId()));
+        this.jLabelUsuarioNome.setText("Nome: " + AuthService.usuario.get("nome").getAsString());
+        this.jLabelUsuarioId.setText("ID: " + String.valueOf(AuthService.usuario.get("id").getAsString()));
     }//GEN-LAST:event_formWindowOpened
 
     private void jLabelInscreverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscreverMouseClicked
@@ -296,7 +296,7 @@ public class FormInscricao extends javax.swing.JFrame {
         JsonObject pessoa = new JsonObject();
         pessoa.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldPessoa.getText())));
         JsonObject usuario = new JsonObject();
-        usuario.add("id", new JsonPrimitive(AuthService.usuario.getId()));
+        usuario.add("id", new JsonPrimitive(Integer.parseInt(AuthService.usuario.get("id").getAsString())));
         JsonObject evento = new JsonObject();
         evento.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldEvento.getText())));
         JsonObject inscricao = new JsonObject();

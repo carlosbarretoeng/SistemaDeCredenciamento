@@ -5,6 +5,8 @@ import Controller.UsuarioController;
 import DAO.JPAfactory;
 import Util.AuthService;
 import Util.Conexao;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -138,7 +140,7 @@ public class Login extends javax.swing.JFrame {
         
         if(this.usuarioController.auth(login, senha)) {
             this.dispose();
-            AuthService.usuario = new UsuarioController().select(login);
+            AuthService.setUsuario(login);
             new Main().setVisible(true);
         }
         else {

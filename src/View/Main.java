@@ -2,6 +2,7 @@
 package View;
 
 import Controller.Controller;
+import Controller.EventoController;
 import Layouts.WrapLayout;
 import Model.Base;
 import Model.Evento;
@@ -33,8 +34,6 @@ import javax.swing.JRootPane;
 public class Main extends javax.swing.JFrame {
 
     public Main() {
-        AuthService.usuario = new Usuario();
-        AuthService.usuario.setId(1);
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         initComponents();
@@ -45,6 +44,7 @@ public class Main extends javax.swing.JFrame {
         else {
             con.configurar();
         }
+        
         this.setLayouts();
         this.getContentPane().setBackground(Color.white);
         new Dragged(this.jPanelDragged, this);
@@ -79,6 +79,7 @@ public class Main extends javax.swing.JFrame {
         this.jLabelMenuDados.setIcon(new ImageIcon("icones//folder.png"));
         this.jLabelArrowImp.setIcon(new ImageIcon("icones//right-arrow.png"));
         this.jLabelArrowExp.setIcon(new ImageIcon("icones//right-arrow.png"));
+        this.jLabelMenuInformacoes.setIcon(new ImageIcon("icones//information.png"));
     }
 
     @SuppressWarnings("unchecked")
@@ -147,6 +148,7 @@ public class Main extends javax.swing.JFrame {
         jLabelConfigDatabase = new javax.swing.JLabel();
         jLabelRelogio = new javax.swing.JLabel();
         jLabelMenuDados = new javax.swing.JLabel();
+        jLabelMenuInformacoes = new javax.swing.JLabel();
         jPanelDragged = new javax.swing.JPanel();
         jLabelClose = new javax.swing.JLabel();
         jLabelTitle = new javax.swing.JLabel();
@@ -274,7 +276,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jScrollPanePessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanelPessoasLayout.createSequentialGroup()
                         .addComponent(jLabelPessoas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 720, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelAddPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelReloadPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -399,7 +401,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelUsuariosLayout.createSequentialGroup()
-                        .addComponent(jScrollPaneUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneUsuarios)
                         .addContainerGap())
                     .addGroup(jPanelUsuariosLayout.createSequentialGroup()
                         .addComponent(jLabelUsuarios)
@@ -830,6 +832,23 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabelMenuInformacoes.setBackground(null);
+        jLabelMenuInformacoes.setFont(new java.awt.Font("Ubuntu", 1, 20)); // NOI18N
+        jLabelMenuInformacoes.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMenuInformacoes.setText("  Informações");
+        jLabelMenuInformacoes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelMenuInformacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMenuInformacoesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelMenuInformacoesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelMenuInformacoesMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSideMenuLayout = new javax.swing.GroupLayout(jPanelSideMenu);
         jPanelSideMenu.setLayout(jPanelSideMenuLayout);
         jPanelSideMenuLayout.setHorizontalGroup(
@@ -852,7 +871,8 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jLabelMenuPessoas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabelMenuInscricoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                                     .addComponent(jLabelMenuUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelMenuDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabelMenuDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelMenuInformacoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(jPanelSideMenuLayout.createSequentialGroup()
@@ -877,6 +897,8 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabelMenuUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelMenuDados, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelMenuInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelSubConfigBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1206,6 +1228,18 @@ public class Main extends javax.swing.JFrame {
         new FormInscricao().setVisible(true);
     }//GEN-LAST:event_jLabelAddInscricoesMouseClicked
 
+    private void jLabelMenuInformacoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMenuInformacoesMouseClicked
+        new Informacoes(this, true).setVisible(true);
+    }//GEN-LAST:event_jLabelMenuInformacoesMouseClicked
+
+    private void jLabelMenuInformacoesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMenuInformacoesMouseEntered
+        this.jLabelMenuDados.setBackground(new Color(255, 255, 255, 30));
+    }//GEN-LAST:event_jLabelMenuInformacoesMouseEntered
+
+    private void jLabelMenuInformacoesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMenuInformacoesMouseExited
+        this.jLabelMenuDados.setBackground(null);
+    }//GEN-LAST:event_jLabelMenuInformacoesMouseExited
+
     public void fillData(String className, Class componentClass, JPanel scrollPanel) {
         scrollPanel.removeAll();
         new Controller() {
@@ -1303,6 +1337,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelMenuConfig;
     private javax.swing.JLabel jLabelMenuDados;
     private javax.swing.JLabel jLabelMenuEventos;
+    private javax.swing.JLabel jLabelMenuInformacoes;
     private javax.swing.JLabel jLabelMenuInscricoes;
     private javax.swing.JLabel jLabelMenuPessoas;
     private javax.swing.JLabel jLabelMenuUsuarios;

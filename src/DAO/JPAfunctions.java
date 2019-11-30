@@ -56,6 +56,13 @@ public class JPAfunctions {
         return query.getResultList();
     }
     
+    public static int selectAmount(Class c) {
+        EntityManager manager = JPAfactory.getManager();
+        String SQL = "select count(*) from " + c.getName();
+        Query query = manager.createQuery(SQL);
+        return Integer.parseInt(String.valueOf(query.getResultList().get(0)));
+    }
+    
     public static List<?> select_p(Class c, String sql){
         EntityManager manager = JPAfactory.getManager();
         Query query = manager.createQuery(sql);

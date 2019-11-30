@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.JPAfunctions;
 import Model.Usuario;
+import java.util.List;
 
 public class UsuarioController extends Controller {
 
@@ -16,10 +17,10 @@ public class UsuarioController extends Controller {
         }).isEmpty();
     }
     
-    public Usuario select(String login) {
-        return (Usuario) JPAfunctions.select(Usuario.class, new String[][]{
+    public String select(String login) {
+        return ((Usuario) JPAfunctions.select(Usuario.class, new String[][]{
             {"login", "'" + login + "'"}
-        }).get(0);
+        }).get(0)).objectToJson();
     }
     
 }

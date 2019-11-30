@@ -40,4 +40,8 @@ public abstract class Controller {
         return data;
     }
     
+    public int selectAmount() {
+        return this.persistence.quantidade();
+    }
+    
 }

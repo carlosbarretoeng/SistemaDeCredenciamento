@@ -3,8 +3,6 @@ package View;
 
 import Controller.EventoController;
 import com.google.gson.JsonObject;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
@@ -16,7 +14,6 @@ public class EventComponent extends javax.swing.JPanel {
     public EventComponent(JsonObject dados, Main parent) {
         this.parent = parent;
         initComponents();
-        System.out.println(dados);
         this.dados = dados;
         this.jLabelCapacidade.setHorizontalAlignment(SwingConstants.RIGHT);
         this.jLabelHora.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -39,7 +36,7 @@ public class EventComponent extends javax.swing.JPanel {
         jLabelCapacidade = new javax.swing.JLabel();
         jLabelLocal = new javax.swing.JLabel();
         jLabelExcluir = new javax.swing.JLabel();
-        jLabelExcluir1 = new javax.swing.JLabel();
+        jLabelAtualizar = new javax.swing.JLabel();
         jLabelData = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -79,15 +76,15 @@ public class EventComponent extends javax.swing.JPanel {
             }
         });
 
-        jLabelExcluir1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jLabelExcluir1.setForeground(new java.awt.Color(51, 51, 255));
-        jLabelExcluir1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelExcluir1.setText("Atualizar");
-        jLabelExcluir1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 51, 255), 1, true));
-        jLabelExcluir1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelExcluir1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelAtualizar.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabelAtualizar.setForeground(new java.awt.Color(51, 51, 255));
+        jLabelAtualizar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelAtualizar.setText("Atualizar");
+        jLabelAtualizar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 51, 255), 1, true));
+        jLabelAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelExcluir1MouseClicked(evt);
+                jLabelAtualizarMouseClicked(evt);
             }
         });
 
@@ -108,7 +105,7 @@ public class EventComponent extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 769, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +132,7 @@ public class EventComponent extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -146,18 +143,18 @@ public class EventComponent extends javax.swing.JPanel {
         this.parent.fillEvents();
     }//GEN-LAST:event_jLabelExcluirMouseClicked
 
-    private void jLabelExcluir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelExcluir1MouseClicked
+    private void jLabelAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAtualizarMouseClicked
         new FormEventos(null, true, this.dados).setVisible(true);
         this.parent.fillEvents();
-    }//GEN-LAST:event_jLabelExcluir1MouseClicked
+    }//GEN-LAST:event_jLabelAtualizarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelAtualizar;
     private javax.swing.JLabel jLabelCapacidade;
     private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelExcluir;
-    private javax.swing.JLabel jLabelExcluir1;
     private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelLocal;
     private javax.swing.JLabel jLabelNome;
