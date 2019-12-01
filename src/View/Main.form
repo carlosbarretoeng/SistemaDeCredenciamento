@@ -88,17 +88,15 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabelReloadEventos" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelVerEvento" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="595" max="-2" attributes="0"/>
-                                  <Component id="jLabelEventosAtualizar" min="-2" pref="122" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabelEventosExcluir" min="-2" pref="106" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jPanelEventosFiltro" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabelVerEvento" min="-2" pref="119" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="595" max="-2" attributes="0"/>
+                              <Component id="jLabelEventosAtualizar" min="-2" pref="122" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabelEventosExcluir" min="-2" pref="106" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jPanelEventosFiltro" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>
@@ -118,10 +116,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="543" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelVerEvento" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelEventosAtualizar" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jLabelEventosExcluir" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabelVerEvento" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="jLabelEventosExcluir" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -335,17 +335,15 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabelReloadPessoas" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelVerPessoa" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="595" max="-2" attributes="0"/>
-                                  <Component id="jLabelPessoasAtualizar" min="-2" pref="122" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabelPessoasExcluir" min="-2" pref="106" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jPanelEventosPessoas" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jScrollPane3" alignment="1" min="-2" pref="949" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabelVerPessoa" min="-2" pref="119" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="595" max="-2" attributes="0"/>
+                              <Component id="jLabelPessoasAtualizar" min="-2" pref="122" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabelPessoasExcluir" min="-2" pref="106" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jPanelEventosPessoas" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="1" min="-2" pref="949" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="29" max="32767" attributes="0"/>
                   </Group>
@@ -365,10 +363,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane3" pref="543" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelVerPessoa" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelPessoasAtualizar" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jLabelPessoasExcluir" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabelVerPessoa" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="jLabelPessoasExcluir" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -588,13 +588,13 @@
                                       <Component id="jLabelReloadInscricoes" min="-2" pref="40" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jPanelInscFiltros" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="342" max="32767" attributes="0"/>
+                                      <Component id="jPanelInscFiltros" min="-2" pref="366" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabelInscVerPessoa" min="-2" pref="138" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabelInscVerEvento" min="-2" pref="138" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" pref="952" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -622,9 +622,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" pref="457" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelInscricaoAtualizar" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jLabelInscricaoExcluir" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="jLabelInscricaoExcluir" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -712,7 +712,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel3" min="-2" pref="85" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldInscFiltroData" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldInscFiltroData" min="-2" pref="234" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -727,14 +728,20 @@
                                           <Component id="jTextFieldInscFiltroPessoa" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabelInscBuscarEvento" pref="85" max="32767" attributes="0"/>
-                                      <Component id="jLabelInscBuscarPessoa" max="32767" attributes="0"/>
+                                      <Component id="jLabelInscBuscarPessoa" pref="81" max="32767" attributes="0"/>
+                                      <Component id="jLabelInscBuscarEvento" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelInscLimparBuscaEvento" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="jLabelInscLimparBuscaPessoa" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -745,13 +752,15 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jTextFieldInscFiltroEvento" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelInscBuscarEvento" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jLabelInscBuscarEvento" alignment="1" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="jLabelInscLimparBuscaEvento" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jTextFieldInscFiltroPessoa" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelInscBuscarPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelInscBuscarPessoa" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jLabelInscLimparBuscaPessoa" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -765,6 +774,13 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jTextFieldInscFiltroEvento">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jTextFieldInscFiltroEventoCaretUpdate"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
@@ -783,6 +799,13 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldInscFiltroPessoa">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="text" type="java.lang.String" value="-"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jTextFieldInscFiltroPessoaCaretUpdate"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel3">
                   <Properties>
@@ -793,6 +816,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextFieldInscFiltroData">
+                  <Events>
+                    <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="jTextFieldInscFiltroDataCaretUpdate"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelInscBuscarEvento">
                   <Properties>
@@ -820,6 +846,47 @@
                       <Color id="Cursor em Forma de M&#xe3;o"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelInscBuscarPessoaMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelInscLimparBuscaEvento">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Calibri" size="18" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="33" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="x"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Limpar filtro de evento"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelInscLimparBuscaEventoMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabelInscLimparBuscaPessoa">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Calibri" size="18" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="33" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="x"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Limpar filtro de pessoa"/>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Cursor em Forma de M&#xe3;o"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelInscLimparBuscaPessoaMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

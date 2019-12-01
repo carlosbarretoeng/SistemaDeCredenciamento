@@ -1,8 +1,11 @@
 
 package Model;
 
+import com.google.gson.GsonBuilder;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
@@ -14,7 +17,7 @@ public class Inscricao extends Base {
     String horario;
     @ManyToOne()
     private Evento evento;
-    @ManyToOne()
+    @ManyToOne() 
     private Usuario usuario;
     @ManyToOne()
     private Pessoa pessoa;

@@ -1,4 +1,3 @@
-
 package View;
 
 import Controller.EventoController;
@@ -13,15 +12,40 @@ import com.google.gson.JsonPrimitive;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public class FormInscricao extends javax.swing.JFrame {
+public class FormInscricao extends javax.swing.JDialog {
 
-    public FormInscricao() {
+    public static boolean cancel = true;
+    public JsonObject json;
+
+    public FormInscricao(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
+        setLocationRelativeTo(null);
+        json = new JsonObject();
+        cancel = true;
+        this.jLabelUsuarioId.setText(AuthService.usuario.get("id").getAsString());
+        this.jLabelUsuarioNome.setText(AuthService.usuario.get("nome").getAsString());
+    }
+
+    public FormInscricao(java.awt.Frame parent, boolean modal, JsonObject inscricao) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        cancel = true;
+        json = inscricao;
+        JsonObject evento = inscricao.get("evento").getAsJsonObject();
+        JsonObject pessoa = inscricao.get("pessoa").getAsJsonObject();
+
+        this.jTextFieldEvento.setText(evento.get("id").getAsString());
+        this.jTextFieldEventoNome.setText(evento.get("nome").getAsString());
+
+        this.jTextFieldPessoa.setText(pessoa.get("id").getAsString());
+        this.jTextFieldPessoaNome.setText(pessoa.get("nome").getAsString());
+
+        this.jLabelUsuarioId.setText(AuthService.usuario.get("id").getAsString());
+        this.jLabelUsuarioNome.setText(AuthService.usuario.get("nome").getAsString());
     }
 
     @SuppressWarnings("unchecked")
@@ -47,12 +71,6 @@ public class FormInscricao extends javax.swing.JFrame {
         jLabelStatusPessoa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Formulário de inscrição");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jPanelBG.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -168,7 +186,7 @@ public class FormInscricao extends javax.swing.JFrame {
         jPanelBGLayout.setHorizontalGroup(
             jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBGLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(33, 33, 33)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelBGLayout.createSequentialGroup()
                         .addComponent(jLabelInscrever, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,49 +203,48 @@ public class FormInscricao extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabelEventoQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jLabelStatusEvento))
+                            .addComponent(jLabelStatusEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelBGLayout.createSequentialGroup()
                             .addComponent(jLabelPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabelPessoaQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(jLabelStatusPessoa))
+                            .addComponent(jLabelStatusPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelBGLayout.createSequentialGroup()
                             .addComponent(jTextFieldEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jTextFieldEventoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanelBGLayout.setVerticalGroup(
             jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBGLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabelEventoQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelStatusEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabelEventoQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelStatusEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldEventoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabelPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelPessoaQuery, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelStatusPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelStatusPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPessoaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jPanelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(20, 20, 20)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelInscrever, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,32 +262,30 @@ public class FormInscricao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelEventoQueryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventoQueryMouseClicked
-        new DialogQuery(this, true, new String[]{"id", "nome", "descricao", "local", "capacidade", "data_inicio", "data_termino", "horario_inicio", "horario_termino"} , new EventoController().select(), Evento.class).setVisible(true);
+        new DialogQuery(null, true, new String[]{"id", "nome", "descricao", "local", "capacidade", "data_inicio", "data_termino", "horario_inicio", "horario_termino"}, new EventoController().select(), Evento.class).setVisible(true);
         this.jTextFieldEvento.setText(DialogQuery.id);
-        if(DialogQuery.id.equals("-")) {
+        if (DialogQuery.id.equals("-")) {
             this.jLabelStatusEvento.setIcon(new ImageIcon("icones//error.png"));
             this.jTextFieldEventoNome.setText("-");
-        }
-        else {
-            this.jTextFieldEventoNome.setText(new Gson().fromJson(new EventoController().select(Integer.parseInt(DialogQuery.id)), JsonObject.class).get("nome").getAsString());    
+        } else {
+            this.jTextFieldEventoNome.setText(new Gson().fromJson(new EventoController().select(Integer.parseInt(DialogQuery.id)), JsonObject.class).get("nome").getAsString());
             this.jLabelStatusEvento.setIcon(new ImageIcon("icones//success.png"));
         }
     }//GEN-LAST:event_jLabelEventoQueryMouseClicked
 
     private void jLabelPessoaQueryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPessoaQueryMouseClicked
         new DialogQuery(
-            this,
-            true, 
-            new String[]{"id", "nome", "cpf", "rg", "endereco", "cidade", "telefone", "email", "matricula"}, 
-            new PessoaController().select(), Pessoa.class
+                null,
+                true,
+                new String[]{"id", "nome", "cpf", "rg", "endereco", "cidade", "telefone", "email", "matricula"},
+                new PessoaController().select(), Pessoa.class
         ).setVisible(true);
         this.jTextFieldPessoa.setText(DialogQuery.id);
-        if(DialogQuery.id.equals("-")) {
+        if (DialogQuery.id.equals("-")) {
             this.jLabelStatusPessoa.setIcon(new ImageIcon("icones//error.png"));
             this.jTextFieldPessoaNome.setText("-");
-        }
-        else {
-            this.jTextFieldPessoaNome.setText(new Gson().fromJson(new PessoaController().select(Integer.parseInt(DialogQuery.id)), JsonObject.class).get("nome").getAsString());    
+        } else {
+            this.jTextFieldPessoaNome.setText(new Gson().fromJson(new PessoaController().select(Integer.parseInt(DialogQuery.id)), JsonObject.class).get("nome").getAsString());
             this.jLabelStatusPessoa.setIcon(new ImageIcon("icones//success.png"));
         }
     }//GEN-LAST:event_jLabelPessoaQueryMouseClicked
@@ -279,37 +294,42 @@ public class FormInscricao extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.jLabelUsuarioNome.setText("Nome: " + AuthService.usuario.get("nome").getAsString());
-        this.jLabelUsuarioId.setText("ID: " + String.valueOf(AuthService.usuario.get("id").getAsString()));
-    }//GEN-LAST:event_formWindowOpened
-
     private void jLabelInscreverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscreverMouseClicked
-        if(this.jTextFieldEvento.getText().equals("-")) {
+        
+        System.out.println(new InscricaoController().inscrito(new String[][]{ {"evento_id", this.jTextFieldEvento.getText()}, {"pessoa_id", this.jTextFieldPessoa.getText()}}));
+        
+        if (this.jTextFieldEvento.getText().equals("-")) {
             JOptionPane.showMessageDialog(rootPane, "Escolha um evento!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
             return;
-        }
-        else if(this.jTextFieldPessoa.getText().equals("-")) {
+        } else if (this.jTextFieldPessoa.getText().equals("-")) {
             JOptionPane.showMessageDialog(rootPane, "Escolha uma pessoa!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
             return;
         }
         
-        JsonObject pessoa = new JsonObject();
-        pessoa.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldPessoa.getText())));
-        JsonObject usuario = new JsonObject();
-        usuario.add("id", new JsonPrimitive(Integer.parseInt(AuthService.usuario.get("id").getAsString())));
-        JsonObject evento = new JsonObject();
-        evento.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldEvento.getText())));
-        JsonObject inscricao = new JsonObject();
-        inscricao.add("id", new JsonPrimitive(0));
-        inscricao.add("pessoa", pessoa); 
-        inscricao.add("evento", evento);
-        inscricao.add("usuario", usuario);
-        inscricao.addProperty("data", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        inscricao.addProperty("horario", new SimpleDateFormat("HH:mm:ss").format(new Date()));
-        System.out.println(inscricao.toString());
-        new InscricaoController().insert(inscricao.toString());
-        this.dispose();
+        if(json.get("evento").getAsJsonObject().get("id").toString().equals(this.jTextFieldEvento.getText()) 
+        && json.get("pessoa").getAsJsonObject().get("id").toString().equals(this.jTextFieldPessoa.getText())
+        || !(new InscricaoController().inscrito(new String[][]{
+            {"evento_id", this.jTextFieldEvento.getText()},
+            {"pessoa_id", this.jTextFieldPessoa.getText()}})       
+        )) {
+            JsonObject pessoa = new JsonObject();
+            pessoa.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldPessoa.getText())));
+            JsonObject usuario = new JsonObject();
+            usuario.add("id", new JsonPrimitive(Integer.parseInt(AuthService.usuario.get("id").getAsString())));
+            JsonObject evento = new JsonObject();
+            evento.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldEvento.getText())));
+            json.add("pessoa", pessoa);
+            json.add("evento", evento);
+            json.add("usuario", usuario);
+            json.addProperty("data", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            json.addProperty("horario", new SimpleDateFormat("HH:mm:ss").format(new Date()));
+            new InscricaoController().insert(json.toString());
+            cancel = false;
+            this.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(rootPane, "Essa pessoa já está inscrita neste evento!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
+        }
     }//GEN-LAST:event_jLabelInscreverMouseClicked
 
     public static void main(String args[]) {
@@ -335,11 +355,19 @@ public class FormInscricao extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FormInscricao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormInscricao().setVisible(true);
+                FormInscricao dialog = new FormInscricao(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

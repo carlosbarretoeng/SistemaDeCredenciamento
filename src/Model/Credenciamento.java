@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 
 @Entity()
 public class Credenciamento extends Base {
+    
     private Date data;
     private String horario;
     @ManyToOne()

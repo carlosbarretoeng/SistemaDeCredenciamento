@@ -26,6 +26,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -140,6 +141,8 @@ public class Main extends javax.swing.JFrame {
         jTextFieldInscFiltroData = new javax.swing.JTextField();
         jLabelInscBuscarEvento = new javax.swing.JLabel();
         jLabelInscBuscarPessoa = new javax.swing.JLabel();
+        jLabelInscLimparBuscaEvento = new javax.swing.JLabel();
+        jLabelInscLimparBuscaPessoa = new javax.swing.JLabel();
         jLabelInscVerEvento = new javax.swing.JLabel();
         jLabelInscVerPessoa = new javax.swing.JLabel();
         jLabelInscricaoAtualizar = new javax.swing.JLabel();
@@ -313,15 +316,14 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabelAddEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelReloadEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEventosLayout.createSequentialGroup()
-                            .addComponent(jLabelVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(595, 595, 595)
-                            .addComponent(jLabelEventosAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanelEventosFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEventosLayout.createSequentialGroup()
+                        .addComponent(jLabelVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(595, 595, 595)
+                        .addComponent(jLabelEventosAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelEventosFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanelEventosLayout.setVerticalGroup(
@@ -337,10 +339,11 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelEventosAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -456,15 +459,14 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabelAddPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelReloadPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPessoasLayout.createSequentialGroup()
-                            .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(595, 595, 595)
-                            .addComponent(jLabelPessoasAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabelPessoasExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanelEventosPessoas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 949, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelPessoasLayout.createSequentialGroup()
+                        .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(595, 595, 595)
+                        .addComponent(jLabelPessoasAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPessoasExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelEventosPessoas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 949, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanelPessoasLayout.setVerticalGroup(
@@ -480,10 +482,11 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelPessoasAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelPessoasExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelPessoasExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -536,14 +539,36 @@ public class Main extends javax.swing.JFrame {
         jPanelInscFiltros.setBackground(new java.awt.Color(255, 255, 255));
         jPanelInscFiltros.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTextFieldInscFiltroEvento.setEditable(false);
+        jTextFieldInscFiltroEvento.setText("-");
+        jTextFieldInscFiltroEvento.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextFieldInscFiltroEventoCaretUpdate(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabel1.setText("Evento");
 
         jLabel2.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabel2.setText("Pessoa");
 
+        jTextFieldInscFiltroPessoa.setEditable(false);
+        jTextFieldInscFiltroPessoa.setText("-");
+        jTextFieldInscFiltroPessoa.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextFieldInscFiltroPessoaCaretUpdate(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabel3.setText("Data");
+
+        jTextFieldInscFiltroData.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextFieldInscFiltroDataCaretUpdate(evt);
+            }
+        });
 
         jLabelInscBuscarEvento.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabelInscBuscarEvento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -559,6 +584,35 @@ public class Main extends javax.swing.JFrame {
         jLabelInscBuscarPessoa.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelInscBuscarPessoa.setText("Buscar");
         jLabelInscBuscarPessoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInscBuscarPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelInscBuscarPessoaMouseClicked(evt);
+            }
+        });
+
+        jLabelInscLimparBuscaEvento.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabelInscLimparBuscaEvento.setForeground(new java.awt.Color(204, 51, 0));
+        jLabelInscLimparBuscaEvento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelInscLimparBuscaEvento.setText("x");
+        jLabelInscLimparBuscaEvento.setToolTipText("Limpar filtro de evento");
+        jLabelInscLimparBuscaEvento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInscLimparBuscaEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelInscLimparBuscaEventoMouseClicked(evt);
+            }
+        });
+
+        jLabelInscLimparBuscaPessoa.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabelInscLimparBuscaPessoa.setForeground(new java.awt.Color(204, 51, 0));
+        jLabelInscLimparBuscaPessoa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelInscLimparBuscaPessoa.setText("x");
+        jLabelInscLimparBuscaPessoa.setToolTipText("Limpar filtro de pessoa");
+        jLabelInscLimparBuscaPessoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelInscLimparBuscaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelInscLimparBuscaPessoaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelInscFiltrosLayout = new javax.swing.GroupLayout(jPanelInscFiltros);
         jPanelInscFiltros.setLayout(jPanelInscFiltrosLayout);
@@ -570,7 +624,8 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(jPanelInscFiltrosLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldInscFiltroData, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldInscFiltroData, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelInscFiltrosLayout.createSequentialGroup()
                         .addGroup(jPanelInscFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanelInscFiltrosLayout.createSequentialGroup()
@@ -581,11 +636,16 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextFieldInscFiltroPessoa)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanelInscFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelInscBuscarEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                            .addComponent(jLabelInscBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelInscBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                            .addComponent(jLabelInscBuscarEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelInscFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelInscLimparBuscaEvento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelInscLimparBuscaPessoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(142, 142, 142)))
+                .addContainerGap())
         );
         jPanelInscFiltrosLayout.setVerticalGroup(
             jPanelInscFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,12 +654,14 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanelInscFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldInscFiltroEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabelInscBuscarEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelInscBuscarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInscLimparBuscaEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelInscFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldInscFiltroPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabelInscBuscarPessoa))
+                    .addComponent(jLabelInscBuscarPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelInscLimparBuscaPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelInscFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldInscFiltroData, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -670,12 +732,12 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelReloadInscricoes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInscricoesLayout.createSequentialGroup()
-                                .addComponent(jPanelInscFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 342, Short.MAX_VALUE)
+                                .addComponent(jPanelInscFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabelInscVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelInscVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE))))
                 .addGap(26, 26, 26))
         );
         jPanelInscricoesLayout.setVerticalGroup(
@@ -695,7 +757,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelInscricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelInscricoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelInscricaoAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelInscricaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -1538,7 +1600,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelArrowExpMouseClicked
 
     private void jPanelExportBGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelExportBGMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jPanelExportBGMouseClicked
 
     private void jLabelAddEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddEventosMouseClicked
@@ -1557,7 +1619,7 @@ public class Main extends javax.swing.JFrame {
         new FormPessoa(this, true).setVisible(true);
         if (!FormPessoa.cancel) {
             JOptionPane.showMessageDialog(jPanelContent, "Registro inserido com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
-            Table.fill(new EventoController().select(), jTableEventos, Evento.class);
+            Table.fill(new PessoaController().select(), jTablePessoas, Pessoa.class);
         }
     }//GEN-LAST:event_jLabelAddPessoasMouseClicked
 
@@ -1578,16 +1640,22 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableInscricoesKeyTyped
 
     private void jTableInscricoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInscricoesMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTableInscricoesMouseClicked
 
     private void jLabelAddInscricoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddInscricoesMouseClicked
-        new FormInscricao().setVisible(true);
+        new FormInscricao(this, true).setVisible(true);
         Table.fill(new InscricaoController().select(), jTableInscricoes, Inscricao.class);
     }//GEN-LAST:event_jLabelAddInscricoesMouseClicked
 
     private void jLabelInscVerPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscVerPessoaMouseClicked
-        this.getDialog(new PessoaComponent(new JsonParser().parse(new PessoaController().select(1)).getAsJsonObject()), 680, 340);
+        try {
+            int id = Integer.parseInt((String) this.jTableInscricoes.getValueAt(this.jTableInscricoes.getSelectedRow(), Table.getColumnIndex(jTableInscricoes, "id")));
+            this.getDialog(new PessoaComponent(new JsonParser().parse(new PessoaController().select(1)).getAsJsonObject()), 680, 340);
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(jPanelContent, "Selecione alguma inscrição para ver a pessoa!");
+        }
     }//GEN-LAST:event_jLabelInscVerPessoaMouseClicked
 
     public void getDialog(JPanel component, int w, int h) {
@@ -1606,17 +1674,31 @@ public class Main extends javax.swing.JFrame {
 
     private void jLabelInscVerEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscVerEventoMouseClicked
         try {
-            int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id")));
+            int id = Integer.parseInt((String) this.jTableInscricoes.getValueAt(this.jTableInscricoes.getSelectedRow(), Table.getColumnIndex(jTableInscricoes, "id")));
             this.getDialog(new EventComponent(new JsonParser().parse(new EventoController().select(id)).getAsJsonObject()), 850, 320);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(jPanelContent, "Selecione algum evento para ver!");
+            JOptionPane.showMessageDialog(jPanelContent, "Selecione alguma inscrição para ver o evento!");
         }
     }//GEN-LAST:event_jLabelInscVerEventoMouseClicked
 
     private void jLabelInscBuscarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscBuscarEventoMouseClicked
         new DialogQuery(this, true, new String[]{"id", "nome", "descricao", "local", "capacidade", "data_inicio", "data_termino", "horario_inicio", "horario_termino"}, new EventoController().select(), Evento.class).setVisible(true);
+        this.jTextFieldInscFiltroEvento.setText(DialogQuery.id);
+        this.filtrar();
     }//GEN-LAST:event_jLabelInscBuscarEventoMouseClicked
 
+    public void filtrar() {
+        ArrayList<String[]> params = new ArrayList<>();
+        if(!this.jTextFieldInscFiltroEvento.getText().equals("-")) {
+            params.add(new String[]{"evento_id", this.jTextFieldInscFiltroEvento.getText()});
+        }
+        if(!this.jTextFieldInscFiltroPessoa.getText().equals("-")) {
+            params.add(new String[]{"pessoa_id", this.jTextFieldInscFiltroPessoa.getText()});
+        }
+        Table.fill(new InscricaoController().select(params.toArray(new String[params.size()][2])), this.jTableInscricoes, Inscricao.class);
+        Table.filter(jTableInscricoes, this.jTextFieldInscFiltroData.getText(), Table.getColumnIndex(jTableInscricoes, "data"));
+    }
+    
     private void jLabelEventosExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventosExcluirMouseClicked
         try {
             int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id")));
@@ -1703,7 +1785,8 @@ public class Main extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(jPanelContent, "Erro ao excluir pessoa! " + e.getCause(), "Error", 0, new ImageIcon("icones//error.png"));
                 }
             }
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             JOptionPane.showMessageDialog(jPanelContent, "Selecione alguma pessoa para excluir!");
         }
     }//GEN-LAST:event_jLabelPessoasExcluirMouseClicked
@@ -1713,7 +1796,17 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelReloadInscricoesMouseClicked
 
     private void jLabelInscricaoAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscricaoAtualizarMouseClicked
-
+        try {
+            int id = Integer.parseInt((String) this.jTableInscricoes.getValueAt(this.jTableInscricoes.getSelectedRow(), Table.getColumnIndex(jTableInscricoes, "id")));
+            new FormInscricao(this, true, new JsonParser().parse(new InscricaoController().select(id)).getAsJsonObject()).setVisible(true);
+            if (!FormInscricao.cancel) {
+                JOptionPane.showMessageDialog(jPanelContent, "Registro atualizado com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+                Table.fill(new InscricaoController().select(), jTableInscricoes, Inscricao.class);
+            }
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(jPanelContent, "Selecione alguma inscrição para atualizar! " + e.getCause());
+        }
     }//GEN-LAST:event_jLabelInscricaoAtualizarMouseClicked
 
     private void jLabelInscricaoExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscricaoExcluirMouseClicked
@@ -1721,14 +1814,48 @@ public class Main extends javax.swing.JFrame {
             int id = Integer.parseInt((String) this.jTableInscricoes.getValueAt(this.jTableInscricoes.getSelectedRow(), Table.getColumnIndex(jTableInscricoes, "id")));
 
             if (JOptionPane.showConfirmDialog(jPanelContent, "Realmente deseja excluir o registro?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
-                new InscricaoController().delete(id);
-                JOptionPane.showMessageDialog(jPanelContent, "Registro excluído com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
-                Table.fill(new InscricaoController().select(), jTableInscricoes, Inscricao.class);
+                try {
+                    new InscricaoController().delete(id);
+                    JOptionPane.showMessageDialog(jPanelContent, "Registro excluído com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+                    Table.fill(new InscricaoController().select(), jTableInscricoes, Inscricao.class);
+                }
+                catch(Exception e) {
+                    JOptionPane.showMessageDialog(jPanelContent, "Erro ao excluir registro! " + e.getCause(), "Error", 0, new ImageIcon("icones//error.png"));
+                }
             }
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             JOptionPane.showMessageDialog(jPanelContent, "Selecione alguma inscrição para excluir!");
         }
     }//GEN-LAST:event_jLabelInscricaoExcluirMouseClicked
+
+    private void jTextFieldInscFiltroEventoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldInscFiltroEventoCaretUpdate
+        
+    }//GEN-LAST:event_jTextFieldInscFiltroEventoCaretUpdate
+
+    private void jTextFieldInscFiltroDataCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldInscFiltroDataCaretUpdate
+        Table.filter(jTableInscricoes, this.jTextFieldInscFiltroData.getText(), Table.getColumnIndex(jTableInscricoes, "data"));
+    }//GEN-LAST:event_jTextFieldInscFiltroDataCaretUpdate
+
+    private void jLabelInscBuscarPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscBuscarPessoaMouseClicked
+        new DialogQuery(this, true, new String[]{"id", "matricula", "email", "nome", "cpf", "rg", "endereco", "cidade", "telefone"}, new PessoaController().select(), Pessoa.class).setVisible(true);
+        this.jTextFieldInscFiltroPessoa.setText(DialogQuery.id);
+        this.filtrar();
+    }//GEN-LAST:event_jLabelInscBuscarPessoaMouseClicked
+
+    private void jTextFieldInscFiltroPessoaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldInscFiltroPessoaCaretUpdate
+        
+    }//GEN-LAST:event_jTextFieldInscFiltroPessoaCaretUpdate
+
+    private void jLabelInscLimparBuscaEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscLimparBuscaEventoMouseClicked
+        this.jTextFieldInscFiltroEvento.setText("-");
+        this.filtrar();
+    }//GEN-LAST:event_jLabelInscLimparBuscaEventoMouseClicked
+
+    private void jLabelInscLimparBuscaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscLimparBuscaPessoaMouseClicked
+        this.jTextFieldInscFiltroPessoa.setText("-");
+        this.filtrar();
+    }//GEN-LAST:event_jLabelInscLimparBuscaPessoaMouseClicked
 
     public void fillData(String className, Class componentClass, JPanel scrollPanel) {
         scrollPanel.removeAll();
@@ -1824,6 +1951,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelImpClasses;
     private javax.swing.JLabel jLabelInscBuscarEvento;
     private javax.swing.JLabel jLabelInscBuscarPessoa;
+    private javax.swing.JLabel jLabelInscLimparBuscaEvento;
+    private javax.swing.JLabel jLabelInscLimparBuscaPessoa;
     private javax.swing.JLabel jLabelInscVerEvento;
     private javax.swing.JLabel jLabelInscVerPessoa;
     private javax.swing.JLabel jLabelInscricaoAtualizar;

@@ -8,10 +8,12 @@ import javax.swing.ImageIcon;
 public class FormPessoa extends javax.swing.JDialog {
 
     public static boolean cancel = true;
+    public JsonObject json;
     
     public FormPessoa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        json = new JsonObject();
         this.setLocationRelativeTo(null);
         this.jLabelConfirmar.setIcon(new ImageIcon("icones//success.png"));
         this.jLabelCancelar.setIcon(new ImageIcon("icones//error.png"));
@@ -21,6 +23,8 @@ public class FormPessoa extends javax.swing.JDialog {
     public FormPessoa(java.awt.Frame parent, boolean modal, JsonObject json) {
         super(parent, modal);
         initComponents();
+        
+        this.json = json;
         
         this.jTextFieldMatricula.setText(json.get("matricula").getAsString());
         this.jTextFieldNome.setText(json.get("nome").getAsString());
@@ -234,8 +238,8 @@ public class FormPessoa extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     private void jLabelConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelConfirmarMouseClicked
-        JsonObject json = new JsonObject();
         json.addProperty("nome", this.jTextFieldNome.getText());
+        json.addProperty("matricula", this.jTextFieldMatricula.getText());
         json.addProperty("cpf", this.jFormattedTextFieldCpf.getText());
         json.addProperty("rg", this.jFormattedTextFieldRg.getText());
         json.addProperty("endereco", this.jTextFieldEndereco.getText());

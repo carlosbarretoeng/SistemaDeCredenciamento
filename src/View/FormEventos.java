@@ -19,10 +19,12 @@ import javax.swing.KeyStroke;
 public class FormEventos extends javax.swing.JDialog {
 
     public static boolean cancel = true;
+    public JsonObject json;
     
     public FormEventos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        json = new JsonObject();
         this.jTextFieldId.setText("0");
         this.jLabelSalvar.setIcon(new ImageIcon("icones//success.png"));
         this.jLabelCancelar.setIcon(new ImageIcon("icones//error.png"));
@@ -37,6 +39,7 @@ public class FormEventos extends javax.swing.JDialog {
         initComponents();
         setEnterEvent();
         cancel = true;
+        this.json = dados;
         this.jLabelSalvar.setIcon(new ImageIcon("icones//success.png"));
         this.jLabelCancelar.setIcon(new ImageIcon("icones//error.png"));
         SimpleDateFormat ddMMyyyy = new SimpleDateFormat("yyyy-MM-dd");
@@ -418,7 +421,6 @@ public class FormEventos extends javax.swing.JDialog {
     }//GEN-LAST:event_formKeyTyped
 
     private void jLabelSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalvarMouseClicked
-        JsonObject json = new JsonObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         json.addProperty("id", this.jTextFieldId.getText());

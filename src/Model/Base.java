@@ -7,7 +7,7 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class Base implements Serializable {
 
-    @Id
+    @Id()
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected int id;
 
