@@ -56,8 +56,16 @@ public class Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setIcons();
         this.jPanelSubConfigBG.setVisible(false);
-
+        this.gerenciarBotoes(AuthService.usuario.get("tipo").getAsString().equals("admin"));
         new Relogio(jLabelRelogio);
+    }
+    
+    public void gerenciarBotoes(boolean admin) {
+        this.jLabelAddUsuarios.setVisible(admin);
+        this.jLabelAddEventos.setVisible(admin);
+        this.jLabelEventosAtualizar.setVisible(admin);
+        this.jLabelEventosExcluir.setVisible(admin);
+        this.jLabelConfigDatabase.setVisible(admin);
     }
 
     public void setIcons() {
@@ -113,6 +121,7 @@ public class Main extends javax.swing.JFrame {
         jLabelVerEvento = new javax.swing.JLabel();
         jLabelEventosAtualizar = new javax.swing.JLabel();
         jLabelEventosExcluir = new javax.swing.JLabel();
+        jLabelEventosCredenciamento = new javax.swing.JLabel();
         jPanelPessoas = new javax.swing.JPanel();
         jLabelPessoas = new javax.swing.JLabel();
         jLabelReloadPessoas = new javax.swing.JLabel();
@@ -185,8 +194,8 @@ public class Main extends javax.swing.JFrame {
         jLabelMenuConfig = new javax.swing.JLabel();
         jPanelSubConfigBG = new javax.swing.JPanel();
         jPanelSubMenuConfig = new javax.swing.JPanel();
-        jLabelLogout = new javax.swing.JLabel();
         jLabelConfigDatabase = new javax.swing.JLabel();
+        jLabelLogout = new javax.swing.JLabel();
         jLabelRelogio = new javax.swing.JLabel();
         jLabelMenuDados = new javax.swing.JLabel();
         jLabelMenuInformacoes = new javax.swing.JLabel();
@@ -303,47 +312,63 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabelEventosCredenciamento.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        jLabelEventosCredenciamento.setForeground(new java.awt.Color(0, 153, 51));
+        jLabelEventosCredenciamento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelEventosCredenciamento.setText("Credenciamento");
+        jLabelEventosCredenciamento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelEventosCredenciamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEventosCredenciamentoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelEventosLayout = new javax.swing.GroupLayout(jPanelEventos);
         jPanelEventos.setLayout(jPanelEventosLayout);
         jPanelEventosLayout.setHorizontalGroup(
             jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEventosLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelEventosLayout.createSequentialGroup()
-                        .addComponent(jLabelEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelAddEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelReloadEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEventosLayout.createSequentialGroup()
-                        .addComponent(jLabelVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(595, 595, 595)
-                        .addComponent(jLabelEventosAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanelEventosFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelEventosLayout.createSequentialGroup()
+                            .addComponent(jLabelEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(762, 762, 762)
+                            .addComponent(jLabelAddEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(7, 7, 7)
+                            .addComponent(jLabelReloadEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelEventosLayout.createSequentialGroup()
+                            .addComponent(jLabelVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelEventosCredenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelEventosAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
         jPanelEventosLayout.setVerticalGroup(
             jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEventosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(13, 13, 13)
                 .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelEventos)
-                    .addComponent(jLabelReloadEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelAddEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabelAddEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelReloadEventos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addComponent(jPanelEventosFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEventosAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelVerEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelEventosCredenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelEventosExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEventosAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -1170,17 +1195,6 @@ public class Main extends javax.swing.JFrame {
         });
         jPanelSubMenuConfig.setLayout(new java.awt.GridLayout(2, 1, 0, 10));
 
-        jLabelLogout.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
-        jLabelLogout.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelLogout.setText("   Sair");
-        jLabelLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelLogout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelLogoutMouseClicked(evt);
-            }
-        });
-        jPanelSubMenuConfig.add(jLabelLogout);
-
         jLabelConfigDatabase.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
         jLabelConfigDatabase.setForeground(new java.awt.Color(255, 255, 255));
         jLabelConfigDatabase.setText("   Conexão");
@@ -1191,6 +1205,17 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jPanelSubMenuConfig.add(jLabelConfigDatabase);
+
+        jLabelLogout.setFont(new java.awt.Font("Ubuntu", 1, 14)); // NOI18N
+        jLabelLogout.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelLogout.setText("   Sair");
+        jLabelLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelLogoutMouseClicked(evt);
+            }
+        });
+        jPanelSubMenuConfig.add(jLabelLogout);
 
         javax.swing.GroupLayout jPanelSubConfigBGLayout = new javax.swing.GroupLayout(jPanelSubConfigBG);
         jPanelSubConfigBG.setLayout(jPanelSubConfigBGLayout);
@@ -1754,7 +1779,7 @@ public class Main extends javax.swing.JFrame {
             int id = Integer.parseInt((String) this.jTablePessoas.getValueAt(this.jTablePessoas.getSelectedRow(), Table.getColumnIndex(jTablePessoas, "id")));
             this.getDialog(new PessoaComponent(new JsonParser().parse(new PessoaController().select(id)).getAsJsonObject()), 680, 340);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(jPanelContent, "Selecione algum evento para ver!");
+            JOptionPane.showMessageDialog(jPanelContent, "Selecione alguma pessoa para ver!");
         }
     }//GEN-LAST:event_jLabelVerPessoaMouseClicked
 
@@ -1857,6 +1882,16 @@ public class Main extends javax.swing.JFrame {
         this.filtrar();
     }//GEN-LAST:event_jLabelInscLimparBuscaPessoaMouseClicked
 
+    private void jLabelEventosCredenciamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventosCredenciamentoMouseClicked
+        try {
+            int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id")));
+            new Credenciamento(this, true, new JsonParser().parse(new EventoController().select(id)).getAsJsonObject()).setVisible(true);
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(jPanelContent, "Escolha um evento para realizar o credenciamento! " + e.getCause(), "Error", 0, new ImageIcon("icones//error.png"));
+        }
+    }//GEN-LAST:event_jLabelEventosCredenciamentoMouseClicked
+
     public void fillData(String className, Class componentClass, JPanel scrollPanel) {
         scrollPanel.removeAll();
         new Controller() {
@@ -1944,6 +1979,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDadosTitle;
     private javax.swing.JLabel jLabelEventos;
     private javax.swing.JLabel jLabelEventosAtualizar;
+    private javax.swing.JLabel jLabelEventosCredenciamento;
     private javax.swing.JLabel jLabelEventosExcluir;
     private javax.swing.JLabel jLabelExpClasses;
     private javax.swing.JLabel jLabelHist;

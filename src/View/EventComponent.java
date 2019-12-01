@@ -2,7 +2,6 @@
 package View;
 
 import com.google.gson.JsonObject;
-import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
 public class EventComponent extends javax.swing.JPanel {
