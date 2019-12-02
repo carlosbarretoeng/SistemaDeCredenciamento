@@ -28,6 +28,8 @@ public class FormInscricao extends javax.swing.JDialog {
         cancel = true;
         this.jLabelUsuarioId.setText(AuthService.usuario.get("id").getAsString());
         this.jLabelUsuarioNome.setText(AuthService.usuario.get("nome").getAsString());
+        this.jLabelStatusEvento.setIcon(new ImageIcon("icones//error.png"));
+        this.jLabelStatusPessoa.setIcon(new ImageIcon("icones//error.png"));
         editing = false;
     }
 
@@ -40,6 +42,9 @@ public class FormInscricao extends javax.swing.JDialog {
         editing = true;
         JsonObject evento = inscricao.get("evento").getAsJsonObject();
         JsonObject pessoa = inscricao.get("pessoa").getAsJsonObject();
+        
+        this.jLabelStatusEvento.setIcon(new ImageIcon("icones//success.png"));
+        this.jLabelStatusPessoa.setIcon(new ImageIcon("icones//success.png"));
 
         this.jTextFieldEvento.setText(evento.get("id").getAsString());
         this.jTextFieldEventoNome.setText(evento.get("nome").getAsString());
@@ -269,12 +274,8 @@ public class FormInscricao extends javax.swing.JDialog {
 
     private void jLabelEventoQueryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventoQueryMouseClicked
         new DialogQuery(null, true, new String[]{"id", "nome", "descricao", "local", "capacidade", "data_inicio", "data_termino", "horario_inicio", "horario_termino"}, new EventoController().select(), Evento.class).setVisible(true);
-        this.jTextFieldEvento.setText(DialogQuery.id);
-        if (DialogQuery.id.equals("-")) {
-            this.jLabelStatusEvento.setIcon(new ImageIcon("icones//error.png"));
-            this.jTextFieldEventoNome.setText("-");
-        }
-        else {
+        if (!DialogQuery.id.equals("-")) {
+            this.jTextFieldEvento.setText(DialogQuery.id);
             this.jTextFieldEventoNome.setText(new Gson().fromJson(new EventoController().select(Integer.parseInt(DialogQuery.id)), JsonObject.class).get("nome").getAsString());
             this.jLabelStatusEvento.setIcon(new ImageIcon("icones//success.png"));
         }
@@ -287,11 +288,8 @@ public class FormInscricao extends javax.swing.JDialog {
                 new String[]{"id", "nome", "cpf", "rg", "endereco", "cidade", "telefone", "email", "matricula"},
                 new PessoaController().select(), Pessoa.class
         ).setVisible(true);
-        this.jTextFieldPessoa.setText(DialogQuery.id);
-        if (DialogQuery.id.equals("-")) {
-            this.jLabelStatusPessoa.setIcon(new ImageIcon("icones//error.png"));
-            this.jTextFieldPessoaNome.setText("-");
-        } else {
+        if (!DialogQuery.id.equals("-")) {
+            this.jTextFieldPessoa.setText(DialogQuery.id);
             this.jTextFieldPessoaNome.setText(new Gson().fromJson(new PessoaController().select(Integer.parseInt(DialogQuery.id)), JsonObject.class).get("nome").getAsString());
             this.jLabelStatusPessoa.setIcon(new ImageIcon("icones//success.png"));
         }
@@ -335,6 +333,7 @@ public class FormInscricao extends javax.swing.JDialog {
            
             System.out.println(json.toString());
             new InscricaoController().insert(json.toString());
+            new InscricaoController().select();
             cancel = false;
             this.dispose();
         }

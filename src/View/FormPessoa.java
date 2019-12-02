@@ -2,6 +2,7 @@
 package View;
 
 import Controller.PessoaController;
+import Controller.UsuarioController;
 import com.google.gson.JsonObject;
 import javax.swing.ImageIcon;
 
@@ -233,8 +234,8 @@ public class FormPessoa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCancelarMouseClicked
-        this.dispose();
         FormPessoa.cancel = true;
+        this.dispose();
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     private void jLabelConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelConfirmarMouseClicked
@@ -247,8 +248,9 @@ public class FormPessoa extends javax.swing.JDialog {
         json.addProperty("cidade", this.jTextFieldCidade.getText());
         json.addProperty("telefone", this.jTextFieldTelefone.getText());
         new PessoaController().insert(json.toString());
-        this.dispose();
         cancel = false;
+        new PessoaController().select();
+        this.dispose();
     }//GEN-LAST:event_jLabelConfirmarMouseClicked
 
     public static void main(String args[]) {

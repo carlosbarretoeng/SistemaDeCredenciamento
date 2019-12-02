@@ -169,7 +169,8 @@ public class Main extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jComboBoxFiltroUsu = new javax.swing.JComboBox();
         jTextFieldFiltroUsu = new javax.swing.JTextField();
-        jLabelVerUsu = new javax.swing.JLabel();
+        jLabelUsuarioExcluir = new javax.swing.JLabel();
+        jLabelUsuarioAtualizar = new javax.swing.JLabel();
         jPanelDados = new javax.swing.JPanel();
         jPanelDadosBG = new javax.swing.JPanel();
         jLabelDadosTitle = new javax.swing.JLabel();
@@ -814,6 +815,11 @@ public class Main extends javax.swing.JFrame {
         jLabelReloadUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelAddUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelAddUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAddUsuariosMouseClicked(evt);
+            }
+        });
 
         jTableUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -877,12 +883,25 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabelVerUsu.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
-        jLabelVerUsu.setText("Ver Usuário");
-        jLabelVerUsu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabelVerUsu.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelUsuarioExcluir.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        jLabelUsuarioExcluir.setForeground(new java.awt.Color(204, 0, 51));
+        jLabelUsuarioExcluir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelUsuarioExcluir.setText("  Excluir  ");
+        jLabelUsuarioExcluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelUsuarioExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelVerUsuMouseClicked(evt);
+                jLabelUsuarioExcluirMouseClicked(evt);
+            }
+        });
+
+        jLabelUsuarioAtualizar.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        jLabelUsuarioAtualizar.setForeground(new java.awt.Color(102, 204, 255));
+        jLabelUsuarioAtualizar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelUsuarioAtualizar.setText("  Atualizar  ");
+        jLabelUsuarioAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelUsuarioAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelUsuarioAtualizarMouseClicked(evt);
             }
         });
 
@@ -890,13 +909,15 @@ public class Main extends javax.swing.JFrame {
         jPanelUsuarios.setLayout(jPanelUsuariosLayout);
         jPanelUsuariosLayout.setHorizontalGroup(
             jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelUsuariosLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelUsuariosLayout.createSequentialGroup()
+                .addGroup(jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelUsuariosLayout.createSequentialGroup()
-                        .addComponent(jLabelVerUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelUsuarioAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelUsuarioExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelUsuariosLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelFiltro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelUsuariosLayout.createSequentialGroup()
@@ -905,8 +926,8 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(jLabelAddUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelReloadUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE))
-                        .addGap(18, 18, 18))))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 962, Short.MAX_VALUE))))
+                .addGap(18, 18, 18))
         );
         jPanelUsuariosLayout.setVerticalGroup(
             jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -919,10 +940,12 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelVerUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(jPanelUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUsuarioAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUsuarioExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanelContent.add(jPanelUsuarios, "card2");
@@ -1867,10 +1890,10 @@ public class Main extends javax.swing.JFrame {
             new FormPessoa(this, true, new JsonParser().parse(new PessoaController().select(id)).getAsJsonObject()).setVisible(true);
             if (!FormPessoa.cancel) {
                 JOptionPane.showMessageDialog(jPanelContent, "Registro atualizado com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
-                Table.fill(new EventoController().select(), jTableEventos, Evento.class);
+                Table.fill(new PessoaController().select(), jTablePessoas, Pessoa.class);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(jPanelContent, "Selecione algum evento para atualizar!");
+            JOptionPane.showMessageDialog(jPanelContent, "Selecione alguma pessoa para atualizar!");
         }
     }//GEN-LAST:event_jLabelPessoasAtualizarMouseClicked
 
@@ -1881,6 +1904,7 @@ public class Main extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(jPanelContent, "Realmente deseja excluir o registro?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 try{
                     new PessoaController().delete(id);
+                    new PessoaController().select();
                     JOptionPane.showMessageDialog(jPanelContent, "Registro excluído com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
                     Table.fill(new PessoaController().select(), jTablePessoas, Pessoa.class);
                 }
@@ -1974,9 +1998,40 @@ public class Main extends javax.swing.JFrame {
         Table.filter(jTablePessoas, this.jTextFieldFiltroUsu.getText(), Table.getColumnIndex(jTablePessoas, this.jComboBoxFiltroUsu.getSelectedItem().toString()));
     }//GEN-LAST:event_jTextFieldFiltroUsuCaretUpdate
 
-    private void jLabelVerUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerUsuMouseClicked
+    private void jLabelUsuarioExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUsuarioExcluirMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabelVerUsuMouseClicked
+    }//GEN-LAST:event_jLabelUsuarioExcluirMouseClicked
+
+    private void jLabelUsuarioAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUsuarioAtualizarMouseClicked
+        try {
+            int id = Integer.parseInt((String) this.jTableUsuarios.getValueAt(this.jTableUsuarios.getSelectedRow(), Table.getColumnIndex(jTableUsuarios, "id")));
+            new FormUsuario(this, true, new JsonParser().parse(new UsuarioController().select(id)).getAsJsonObject()).setVisible(true);
+            if (!FormInscricao.cancel) {
+                JOptionPane.showMessageDialog(jPanelContent, "Registro atualizado com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+                new UsuarioController().select();
+                Table.fill(new UsuarioController().select(), jTableUsuarios, Usuario.class);
+                AuthService.usuario = new JsonParser().parse(new UsuarioController().select(AuthService.usuario.get("id").getAsInt())).getAsJsonObject();
+                this.gerenciarBotoes(AuthService.usuario.get("tipo").equals("admin"));
+            }
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(jPanelContent, "Selecione algum usuário para atualizar! " + e.getCause());
+        }
+    }//GEN-LAST:event_jLabelUsuarioAtualizarMouseClicked
+
+    private void jLabelAddUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddUsuariosMouseClicked
+        try {
+            new FormUsuario(this, true).setVisible(true);
+            if (!FormUsuario.cancel) {
+                JOptionPane.showMessageDialog(jPanelContent, "Registro atualizado com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+                new UsuarioController().select();
+                Table.fill(new UsuarioController().select(), jTableUsuarios, Usuario.class);
+            }
+        } 
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(jPanelContent, "Selecione algum usuário para atualizar! " + e.getCause());
+        }
+    }//GEN-LAST:event_jLabelAddUsuariosMouseClicked
 
     public void fillData(String className, Class componentClass, JPanel scrollPanel) {
         scrollPanel.removeAll();
@@ -2103,10 +2158,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelTitleExport;
     private javax.swing.JLabel jLabelTitleImport;
+    private javax.swing.JLabel jLabelUsuarioAtualizar;
+    private javax.swing.JLabel jLabelUsuarioExcluir;
     private javax.swing.JLabel jLabelUsuarios;
     private javax.swing.JLabel jLabelVerEvento;
     private javax.swing.JLabel jLabelVerPessoa;
-    private javax.swing.JLabel jLabelVerUsu;
     private javax.swing.JList jListClasses;
     private javax.swing.JList jListClassesExp;
     private javax.swing.JPanel jPanelContent;
