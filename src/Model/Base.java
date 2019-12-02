@@ -1,6 +1,8 @@
 package Model;
 
 import com.google.gson.GsonBuilder;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.StaxDriver;
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -25,6 +27,14 @@ public abstract class Base implements Serializable {
 
     public String objectToJson() {
         return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(this);
+    }
+    
+    public Base xmlToObject(String xml) {
+        return (Base) new XStream(new StaxDriver()).fromXML(xml);
+    }
+
+    public String objectToXml() {
+        return new XStream(new StaxDriver()).toXML(this);
     }
     
 }

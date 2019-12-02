@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 
 public class FormInscricao extends javax.swing.JDialog {
 
+    public boolean editing = false;
     public static boolean cancel = true;
     public JsonObject json;
 
@@ -27,6 +28,7 @@ public class FormInscricao extends javax.swing.JDialog {
         cancel = true;
         this.jLabelUsuarioId.setText(AuthService.usuario.get("id").getAsString());
         this.jLabelUsuarioNome.setText(AuthService.usuario.get("nome").getAsString());
+        editing = false;
     }
 
     public FormInscricao(java.awt.Frame parent, boolean modal, JsonObject inscricao) {
@@ -35,6 +37,7 @@ public class FormInscricao extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         cancel = true;
         json = inscricao;
+        editing = true;
         JsonObject evento = inscricao.get("evento").getAsJsonObject();
         JsonObject pessoa = inscricao.get("pessoa").getAsJsonObject();
 
@@ -46,6 +49,9 @@ public class FormInscricao extends javax.swing.JDialog {
 
         this.jLabelUsuarioId.setText(AuthService.usuario.get("id").getAsString());
         this.jLabelUsuarioNome.setText(AuthService.usuario.get("nome").getAsString());
+        
+        this.jLabelStatusEvento.setIcon(new ImageIcon("icones//success.png"));
+        this.jLabelStatusPessoa.setIcon(new ImageIcon("icones//success.png"));
     }
 
     @SuppressWarnings("unchecked")
@@ -267,7 +273,8 @@ public class FormInscricao extends javax.swing.JDialog {
         if (DialogQuery.id.equals("-")) {
             this.jLabelStatusEvento.setIcon(new ImageIcon("icones//error.png"));
             this.jTextFieldEventoNome.setText("-");
-        } else {
+        }
+        else {
             this.jTextFieldEventoNome.setText(new Gson().fromJson(new EventoController().select(Integer.parseInt(DialogQuery.id)), JsonObject.class).get("nome").getAsString());
             this.jLabelStatusEvento.setIcon(new ImageIcon("icones//success.png"));
         }
@@ -295,9 +302,7 @@ public class FormInscricao extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     private void jLabelInscreverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInscreverMouseClicked
-        
-        System.out.println(new InscricaoController().inscrito(new String[][]{ {"evento_id", this.jTextFieldEvento.getText()}, {"pessoa_id", this.jTextFieldPessoa.getText()}}));
-        
+                
         if (this.jTextFieldEvento.getText().equals("-")) {
             JOptionPane.showMessageDialog(rootPane, "Escolha um evento!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
             return;
@@ -305,13 +310,16 @@ public class FormInscricao extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Escolha uma pessoa!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
             return;
         }
+                
+        boolean inscrito = (new InscricaoController().inscrito(new String[][]{
+            {"evento", this.jTextFieldEvento.getText()},
+            {"pessoa", this.jTextFieldPessoa.getText()}})) && (editing? !(json.get("evento").getAsJsonObject().get("id").toString().equals(this.jTextFieldEvento.getText()) 
+            && json.get("pessoa").getAsJsonObject().get("id").toString().equals(this.jTextFieldPessoa.getText())): true);
         
-        if(json.get("evento").getAsJsonObject().get("id").toString().equals(this.jTextFieldEvento.getText()) 
-        && json.get("pessoa").getAsJsonObject().get("id").toString().equals(this.jTextFieldPessoa.getText())
-        || !(new InscricaoController().inscrito(new String[][]{
-            {"evento_id", this.jTextFieldEvento.getText()},
-            {"pessoa_id", this.jTextFieldPessoa.getText()}})       
-        )) {
+        if(inscrito) {
+            JOptionPane.showMessageDialog(rootPane, "Essa pessoa já está inscrita neste evento!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
+        }
+        else {
             JsonObject pessoa = new JsonObject();
             pessoa.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldPessoa.getText())));
             JsonObject usuario = new JsonObject();
@@ -321,15 +329,16 @@ public class FormInscricao extends javax.swing.JDialog {
             json.add("pessoa", pessoa);
             json.add("evento", evento);
             json.add("usuario", usuario);
+            json.add("id", new JsonPrimitive(editing? json.get("id").getAsInt(): 0));
             json.addProperty("data", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             json.addProperty("horario", new SimpleDateFormat("HH:mm:ss").format(new Date()));
+           
+            System.out.println(json.toString());
             new InscricaoController().insert(json.toString());
             cancel = false;
             this.dispose();
         }
-        else {
-            JOptionPane.showMessageDialog(rootPane, "Essa pessoa já está inscrita neste evento!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
-        }
+
     }//GEN-LAST:event_jLabelInscreverMouseClicked
 
     public static void main(String args[]) {

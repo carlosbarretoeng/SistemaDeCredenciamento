@@ -6,6 +6,7 @@
     <class>Model.Inscricao</class>
     <class>Model.Pessoa</class>
     <class>Model.Usuario</class>
+    <class>Model.Credenciamento</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/qrevent"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
