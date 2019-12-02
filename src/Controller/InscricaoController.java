@@ -47,4 +47,16 @@ public class InscricaoController extends Controller {
         Query query = manager.createQuery(SQL);
         return ((Inscricao) query.getResultList().get(0)).objectToJson();
     }
+    
+    public static int inscricoesRealizadas(int evento) {
+        EntityManager manager = JPAfactory.getManager(); 
+        String SQL = "select count(*) from Model.Inscricao i where i.evento=" + evento;
+        return Integer.parseInt(manager.createQuery(SQL).getResultList().get(0).toString());
+    }
+    
+    public static int inscricoesRealizadas() {
+        EntityManager manager = JPAfactory.getManager(); 
+        String SQL = "select count(*) from Model.Inscricao i";
+        return Integer.parseInt(manager.createQuery(SQL).getResultList().get(0).toString());
+    }
 }

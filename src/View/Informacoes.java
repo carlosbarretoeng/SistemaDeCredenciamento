@@ -1,6 +1,7 @@
 
 package View;
 
+import Controller.CredenciamentoController;
 import Controller.EventoController;
 import Controller.InscricaoController;
 import Controller.PessoaController;
@@ -12,6 +13,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Random;
+import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class Informacoes extends javax.swing.JDialog {
     
@@ -27,9 +31,7 @@ public class Informacoes extends javax.swing.JDialog {
         }
         
         this.jPanelChart.setLayout(new java.awt.BorderLayout());
-        this.jPanelChart.add(new RingChartController(new Random().nextDouble()).createPanel(), BorderLayout.CENTER);
-        this.jPanelChart.validate();
-        
+                
         this.jLabelEventos.setText(String.valueOf(new EventoController().selectAmount()) + " eventos");
         this.jLabelPessoas.setText(String.valueOf(new PessoaController().selectAmount()) + " pessoas");
         this.jLabelInscricoes.setText(String.valueOf(new InscricaoController().selectAmount())  + " inscrições");
@@ -38,14 +40,52 @@ public class Informacoes extends javax.swing.JDialog {
         this.jTableEventos.getTableHeader().setOpaque(false);
         this.jTableEventos.getTableHeader().setBackground(new Color(32, 136, 203));
         this.jTableEventos.setRowHeight(25);
-        
+                
         this.setLocationRelativeTo(null);
                 
         this.fill();
+        
+        showPercent(Integer.parseInt((String)jTableEventos.getValueAt(jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id"))));
+        this.jLabelInscricoes.setText(InscricaoController.inscricoesRealizadas() + " inscrições realizadas");
+        this.jLabelPresencas.setText(CredenciamentoController.presencasConfirmadas() + " presenças confirmadas");
+        
+        jTableEventos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                try {
+                    update();
+                }
+                catch(Exception e) {}
+            }
+        });
     }   
     
     public void fill() {
         Table.fill(new EventoController().select(), jTableEventos, Evento.class);
+    }
+    
+    public void showPercent(int evento) {
+        try{
+            double perc = EventoController.getPorcentagemCred(evento);
+            this.jLabelEventosPerc.setText("Pessoas credenciadas (" + perc*100 + ")%");
+            jPanelChart.add(new RingChartController(perc).createPanel(), BorderLayout.CENTER);
+            jPanelChart.validate();
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void showPercent() {
+        try{
+            double perc = EventoController.getPorcentagemCred();
+            this.jLabelEventosPerc.setText("Pessoas credenciadas (" + perc*100 + ")%");
+            jPanelChart.add(new RingChartController(perc).createPanel(), BorderLayout.CENTER);
+            jPanelChart.validate();
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -58,7 +98,7 @@ public class Informacoes extends javax.swing.JDialog {
         jLabelPessoas = new javax.swing.JLabel();
         jLabelInscricoes = new javax.swing.JLabel();
         jLabelPresencas = new javax.swing.JLabel();
-        jLabelEventos1 = new javax.swing.JLabel();
+        jLabelEventosPerc = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -67,6 +107,7 @@ public class Informacoes extends javax.swing.JDialog {
         jLabelEvento = new javax.swing.JLabel();
         jComboBoxFiltro = new javax.swing.JComboBox();
         jTextFieldFiltro = new javax.swing.JTextField();
+        jButtonTodos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -103,10 +144,10 @@ public class Informacoes extends javax.swing.JDialog {
         jLabelPresencas.setForeground(new java.awt.Color(204, 204, 204));
         jLabelPresencas.setText("0 presenças confirmadas");
 
-        jLabelEventos1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabelEventos1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabelEventos1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelEventos1.setText("Pessoas credenciadas (%)");
+        jLabelEventosPerc.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabelEventosPerc.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelEventosPerc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelEventosPerc.setText("Pessoas credenciadas (%)");
 
         jSeparator1.setForeground(new java.awt.Color(72, 136, 123));
 
@@ -184,6 +225,16 @@ public class Informacoes extends javax.swing.JDialog {
             }
         });
 
+        jButtonTodos.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonTodos.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        jButtonTodos.setForeground(new java.awt.Color(0, 153, 153));
+        jButtonTodos.setText("Todos");
+        jButtonTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTodosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBGLayout = new javax.swing.GroupLayout(jPanelBG);
         jPanelBG.setLayout(jPanelBGLayout);
         jPanelBGLayout.setHorizontalGroup(
@@ -192,22 +243,24 @@ public class Informacoes extends javax.swing.JDialog {
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBGLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
-                                .addComponent(jComboBoxFiltro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelPresencas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelInscricoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
+                                    .addComponent(jComboBoxFiltro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelPresencas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelInscricoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(42, 42, 42)
                         .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelChart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelEventos1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)))
+                            .addComponent(jLabelEventosPerc, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -235,7 +288,9 @@ public class Informacoes extends javax.swing.JDialog {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBGLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(1, 1, 1)
+                        .addComponent(jButtonTodos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxFiltro)
                             .addComponent(jTextFieldFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,7 +306,7 @@ public class Informacoes extends javax.swing.JDialog {
                         .addComponent(jLabelPresencas, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelBGLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelEventos1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEventosPerc, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
                         .addComponent(jPanelChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -284,21 +339,30 @@ public class Informacoes extends javax.swing.JDialog {
     }//GEN-LAST:event_jTableEventosCaretPositionChanged
 
     private void jTableEventosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableEventosKeyTyped
-        this.update();
+        
     }//GEN-LAST:event_jTableEventosKeyTyped
 
     private void jTableEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEventosMouseClicked
-        this.update();
+        
     }//GEN-LAST:event_jTableEventosMouseClicked
 
+    private void jButtonTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTodosActionPerformed
+        showPercent();
+        this.jLabelInscricoes.setText(InscricaoController.inscricoesRealizadas() + " inscrições realizadas");
+        this.jLabelPresencas.setText(CredenciamentoController.presencasConfirmadas() + " presenças confirmadas");
+        this.jLabelEvento.setText("todos");
+    }//GEN-LAST:event_jButtonTodosActionPerformed
+
     public void update() {
-        int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), 0));
-        this.jPanelChart.setLayout(new java.awt.BorderLayout());
-        this.jPanelChart.add(new RingChartController(new Random().nextDouble()).createPanel(), BorderLayout.CENTER);
-        this.jPanelChart.validate();
-        
-        this.jLabelInscricoes.setText(String.valueOf(new Random().nextInt(100)) + " inscrições realizadas");
-        this.jLabelPresencas.setText(String.valueOf(new Random().nextInt(100)) + " presenças confirmadas");
+        showPercent(Integer.parseInt((String)jTableEventos.getValueAt(jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id"))));
+        try{
+            int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id")));
+            String nome = (String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "nome"));
+            this.jLabelEvento.setText(nome);
+            this.jLabelInscricoes.setText(InscricaoController.inscricoesRealizadas(id) + " inscrições realizadas");
+            this.jLabelPresencas.setText(CredenciamentoController.presencasConfirmadas(id) + " presenças confirmadas");
+        }
+        catch(Exception e) {}
     }
     
     public static void main(String args[]) {
@@ -341,12 +405,13 @@ public class Informacoes extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonTodos;
     private javax.swing.JComboBox jComboBoxFiltro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelEvento;
     private javax.swing.JLabel jLabelEventos;
-    private javax.swing.JLabel jLabelEventos1;
+    private javax.swing.JLabel jLabelEventosPerc;
     private javax.swing.JLabel jLabelInscricoes;
     private javax.swing.JLabel jLabelPessoas;
     private javax.swing.JLabel jLabelPresencas;

@@ -1,1 +1,1 @@
-{"driver":"com.mysql.jdbc.Driver","host":"34.95.238.134","porta":"3306","usuario":"franzoni","senha":"123456","banco":"qrevent","id":0}
+{"driver":"com.mysql.jdbc.Driver","host":"localhost","porta":"3306","usuario":"root","senha":"123456","banco":"qrevent","id":0}

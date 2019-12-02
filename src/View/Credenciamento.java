@@ -1,9 +1,9 @@
 package View;
 
 import Controller.CredenciamentoController;
+import Controller.EventoController;
 import Controller.InscricaoController;
 import Controller.PessoaController;
-import Model.Evento;
 import Model.Pessoa;
 import Util.AuthService;
 import Util.Relogio;
@@ -16,8 +16,6 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
