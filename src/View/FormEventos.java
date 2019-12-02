@@ -433,7 +433,6 @@ public class FormEventos extends javax.swing.JDialog {
         json.addProperty("horario_inicio", this.jFormattedTextFieldHoraInicio.getText());
         json.addProperty("horario_termino", this.jFormattedTextFieldHoraTermino.getText());
         new EventoController().insert(json.toString());
-        new EventoController().select();
         cancel = false;
         this.dispose();
     }//GEN-LAST:event_jLabelSalvarMouseClicked

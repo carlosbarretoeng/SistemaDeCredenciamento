@@ -249,7 +249,6 @@ public class FormPessoa extends javax.swing.JDialog {
         json.addProperty("telefone", this.jTextFieldTelefone.getText());
         new PessoaController().insert(json.toString());
         cancel = false;
-        new PessoaController().select();
         this.dispose();
     }//GEN-LAST:event_jLabelConfirmarMouseClicked
 

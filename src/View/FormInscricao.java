@@ -331,9 +331,7 @@ public class FormInscricao extends javax.swing.JDialog {
             json.addProperty("data", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             json.addProperty("horario", new SimpleDateFormat("HH:mm:ss").format(new Date()));
            
-            System.out.println(json.toString());
             new InscricaoController().insert(json.toString());
-            new InscricaoController().select();
             cancel = false;
             this.dispose();
         }

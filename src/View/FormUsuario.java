@@ -176,7 +176,6 @@ public class FormUsuario extends javax.swing.JDialog {
             json.addProperty("id", 0);
         new UsuarioController().insert(json.toString());
         cancel = false;
-        new UsuarioController().select();
         this.dispose();
     }//GEN-LAST:event_jLabelConfirmarMouseClicked
 

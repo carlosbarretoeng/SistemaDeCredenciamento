@@ -67,6 +67,8 @@ public class Main extends javax.swing.JFrame {
         this.jLabelEventosAtualizar.setVisible(admin);
         this.jLabelEventosExcluir.setVisible(admin);
         this.jLabelConfigDatabase.setVisible(admin);
+        this.jLabelMenuUsuarios.setVisible(admin);
+        this.jLabelMenuDados.setVisible(admin);
     }
 
     public void setIcons() {
@@ -1732,6 +1734,7 @@ public class Main extends javax.swing.JFrame {
     private void jLabelAddEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddEventosMouseClicked
         new FormEventos(this, true).setVisible(true);
         if(!FormEventos.cancel) {
+            new EventoController().select();
             JOptionPane.showMessageDialog(jPanelContent, "Registro inserido com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
             Table.fill(new EventoController().select(), jTableEventos, Evento.class);
         }
@@ -1744,6 +1747,7 @@ public class Main extends javax.swing.JFrame {
     private void jLabelAddPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddPessoasMouseClicked
         new FormPessoa(this, true).setVisible(true);
         if (!FormPessoa.cancel) {
+            new PessoaController().select();
             JOptionPane.showMessageDialog(jPanelContent, "Registro inserido com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
             Table.fill(new PessoaController().select(), jTablePessoas, Pessoa.class);
         }
@@ -1832,6 +1836,7 @@ public class Main extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(jPanelContent, "Realmente deseja excluir o registro?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 try {
                     new EventoController().delete(id);
+                    new EventoController().select();
                     JOptionPane.showMessageDialog(jPanelContent, "Registro excluído com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
                     Table.fill(new EventoController().select(), jTableEventos, Evento.class);
                 }
@@ -1848,7 +1853,8 @@ public class Main extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id")));
             new FormEventos(this, true, new JsonParser().parse(new EventoController().select(id)).getAsJsonObject()).setVisible(true);
-            if(!FormEventos.cancel) {
+            if(!FormEventos.cancel) { 
+                new EventoController().select();
                 JOptionPane.showMessageDialog(jPanelContent, "Registro atualizado com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
                 Table.fill(new EventoController().select(), jTableEventos, Evento.class);
             }
@@ -1904,7 +1910,6 @@ public class Main extends javax.swing.JFrame {
             if (JOptionPane.showConfirmDialog(jPanelContent, "Realmente deseja excluir o registro?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
                 try{
                     new PessoaController().delete(id);
-                    new PessoaController().select();
                     JOptionPane.showMessageDialog(jPanelContent, "Registro excluído com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
                     Table.fill(new PessoaController().select(), jTablePessoas, Pessoa.class);
                 }
@@ -2006,12 +2011,14 @@ public class Main extends javax.swing.JFrame {
         try {
             int id = Integer.parseInt((String) this.jTableUsuarios.getValueAt(this.jTableUsuarios.getSelectedRow(), Table.getColumnIndex(jTableUsuarios, "id")));
             new FormUsuario(this, true, new JsonParser().parse(new UsuarioController().select(id)).getAsJsonObject()).setVisible(true);
-            if (!FormInscricao.cancel) {
+            if (!FormUsuario.cancel) {
                 JOptionPane.showMessageDialog(jPanelContent, "Registro atualizado com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
-                new UsuarioController().select();
                 Table.fill(new UsuarioController().select(), jTableUsuarios, Usuario.class);
                 AuthService.usuario = new JsonParser().parse(new UsuarioController().select(AuthService.usuario.get("id").getAsInt())).getAsJsonObject();
                 this.gerenciarBotoes(AuthService.usuario.get("tipo").equals("admin"));
+                 if(AuthService.usuario.get("tipo").getAsString().equals("comum")) {
+                    this.alterarBox(this.jPanelEventos);
+                }
             }
         } 
         catch (Exception e) {
@@ -2024,7 +2031,6 @@ public class Main extends javax.swing.JFrame {
             new FormUsuario(this, true).setVisible(true);
             if (!FormUsuario.cancel) {
                 JOptionPane.showMessageDialog(jPanelContent, "Registro atualizado com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
-                new UsuarioController().select();
                 Table.fill(new UsuarioController().select(), jTableUsuarios, Usuario.class);
             }
         } 

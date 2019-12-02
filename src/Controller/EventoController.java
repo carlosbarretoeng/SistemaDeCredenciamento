@@ -2,13 +2,13 @@
 package Controller;
 
 import Model.Evento;
+
 public class EventoController extends Controller {
 
     @Override
     public void init() {
         this.class_ = new Evento();
     }
-    
 
     public static double getPorcentagemCred(int eventoId) {
         int presencas = CredenciamentoController.presencasConfirmadas(eventoId), inscricoes = InscricaoController.inscricoesRealizadas(eventoId);
