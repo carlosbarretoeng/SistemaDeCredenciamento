@@ -12,8 +12,6 @@ import Util.Table;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.util.Random;
-import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -44,12 +42,12 @@ public class Informacoes extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
                 
         this.fill();
+        showPercent(this.jTableEventos.getRowCount()>0? Integer.parseInt((String)jTableEventos.getValueAt(jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id"))): 0);
         
-        showPercent(Integer.parseInt((String)jTableEventos.getValueAt(jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id"))));
         this.jLabelInscricoes.setText(InscricaoController.inscricoesRealizadas() + " inscrições realizadas");
         this.jLabelPresencas.setText(CredenciamentoController.presencasConfirmadas() + " presenças confirmadas");
         
-        jTableEventos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        this.jTableEventos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
                 try {

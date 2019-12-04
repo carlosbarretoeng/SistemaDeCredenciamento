@@ -1,7 +1,6 @@
 package View;
 
 import Controller.CredenciamentoController;
-import Controller.EventoController;
 import Controller.InscricaoController;
 import Controller.PessoaController;
 import Model.Pessoa;

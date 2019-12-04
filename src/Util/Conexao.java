@@ -32,6 +32,7 @@ public class Conexao extends Base{
             Class.forName(driver);
             DriverManager.getConnection(url(), usuario, senha);
         } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
             return false;
         }
         return true;

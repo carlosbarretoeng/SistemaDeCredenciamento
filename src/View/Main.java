@@ -22,7 +22,6 @@ import com.google.gson.JsonParser;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Label;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -50,6 +49,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             con.configurar();
         }
+        System.out.println(EventoController.isFull(1));
         Table.fill(new EventoController().select(), jTableEventos, Evento.class);
         this.setLayouts();
         this.getContentPane().setBackground(Color.white);

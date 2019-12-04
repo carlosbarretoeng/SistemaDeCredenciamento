@@ -4,6 +4,7 @@ import Controller.EventoController;
 import com.google.gson.JsonObject;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,9 +13,12 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
 public class FormEventos extends javax.swing.JDialog {
 
@@ -423,6 +427,30 @@ public class FormEventos extends javax.swing.JDialog {
     private void jLabelSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalvarMouseClicked
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        
+        String data_inicio = ((JTextField) this.jDateChooserDataInicio.getDateEditor().getUiComponent()).getText();
+        String data_termino = ((JTextField) this.jDateChooserDataTermino.getDateEditor().getUiComponent()).getText();
+        
+        if(data_inicio.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "O campo data de início é obrigatório!", "Error", WIDTH, new ImageIcon("icones//error.png"));
+            return;
+        }
+        
+        if(data_termino.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "O campo data de término é obrigatório!", "Error", WIDTH, new ImageIcon("icones//error.png"));
+            return;
+        }
+        
+        if(!validarHorario(this.jFormattedTextFieldHoraInicio.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "Horário de início inválido!", "Error", WIDTH, new ImageIcon("icones//error.png"));
+            return;
+        }
+        
+        if(!validarHorario(this.jFormattedTextFieldHoraTermino.getText())) {
+            JOptionPane.showMessageDialog(rootPane, "Horário de término inválido!", "Error", WIDTH, new ImageIcon("icones//error.png"));
+            return;
+        }
+                
         json.addProperty("id", this.jTextFieldId.getText());
         json.addProperty("nome", this.jTextFieldNome.getText());
         json.addProperty("local", this.jTextFieldLocal.getText());
@@ -442,6 +470,15 @@ public class FormEventos extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
+    public boolean validarHorario(String horario) {
+        try {
+            return Pattern.matches("[0-9][0-9]:[0-9][0-9]", horario) && Integer.parseInt(horario.split(":")[0])<24 && Integer.parseInt(horario.split(":")[0])<60;
+        }
+        catch(Exception e) {
+            return false;
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

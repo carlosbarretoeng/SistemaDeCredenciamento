@@ -318,6 +318,12 @@ public class FormInscricao extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(rootPane, "Essa pessoa já está inscrita neste evento!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
         }
         else {
+            
+            if(EventoController.isFull(Integer.parseInt(this.jTextFieldEvento.getText()))) {
+                JOptionPane.showMessageDialog(rootPane, "O evento selecionado está cheio!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
+                return;
+            }
+            
             JsonObject pessoa = new JsonObject();
             pessoa.add("id", new JsonPrimitive(Integer.parseInt(this.jTextFieldPessoa.getText())));
             JsonObject usuario = new JsonObject();
