@@ -10,6 +10,7 @@ public class Configuracao extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.updateUrl();
     }
 
     @SuppressWarnings("unchecked")
@@ -150,7 +151,7 @@ public class Configuracao extends javax.swing.JDialog {
         jLabelSenha.setText("Senha");
 
         jComboBoxDriver.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
-        jComboBoxDriver.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "com.mysql.jdbc.Driver" }));
+        jComboBoxDriver.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "com.mysql.jdbc.Driver", "com.mysql.cj.jdbc.Driver" }));
 
         jTextFieldUsuario.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jTextFieldUsuario.setText("root");
@@ -278,6 +279,7 @@ public class Configuracao extends javax.swing.JDialog {
                 + this.jTextFieldIp.getText() + ":"
                 + this.jTextFieldPorta.getText() + "/"
                 + this.jTextFieldNomeDoBanco.getText()
+                + "?useTimezone=true&serverTimezone=America/Sao_Paulo"
         );
     }
 

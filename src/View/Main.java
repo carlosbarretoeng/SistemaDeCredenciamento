@@ -56,6 +56,7 @@ public class Main extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setIcons();
         this.jPanelSubConfigBG.setVisible(false);
+        Table.fill(new EventoController().select(), jTableEventos, Evento.class);
         //this.gerenciarBotoes(AuthService.usuario.get("tipo").getAsString().equals("admin"));
         new Relogio(jLabelRelogio);
     }
@@ -1510,10 +1511,12 @@ public class Main extends javax.swing.JFrame {
 
     private void jLabelLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLogoutMouseClicked
         this.jPanelSubConfigBG.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_jLabelLogoutMouseClicked
 
     private void jLabelMenuEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMenuEventosMouseClicked
         this.alterarBox(this.jPanelEventos);
+        Table.fill(new EventoController().select(), this.jTableEventos, Evento.class);
     }//GEN-LAST:event_jLabelMenuEventosMouseClicked
 
     private void jLabelMenuPessoasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMenuPessoasMouseClicked

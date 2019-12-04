@@ -7,8 +7,10 @@ import Model.Base;
 import View.Main;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,8 +34,13 @@ public class Conexao extends Base{
     public boolean testar() {
         try {
             Class.forName(driver);
-            DriverManager.getConnection(url(), usuario, senha);
-        } catch (ClassNotFoundException | SQLException e) {
+            Connection con = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.porta, usuario, senha);
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + this.banco);
+            stmt.executeUpdate("SET @@global.time_zone = '+3:00'");
+            con.close();
+        }
+        catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
             return false;
         }
@@ -59,7 +66,7 @@ public class Conexao extends Base{
                 Arquivo.escrever("arquivos//conexao.json", this.objectToJson());
             }
             catch (IOException ex) {}
-            JOptionPane.showMessageDialog(null, "Você utilizou uma conexão nova. O sistema precisa ser reiniciado para a criação das tabelas...", "Error", WIDTH, new ImageIcon("icones//error.png"));
+            JOptionPane.showMessageDialog(null, "Você está utilizando uma conexão nova. O sistema precisa ser reiniciado para a criação das tabelas...", "Error", WIDTH, new ImageIcon("icones//error.png"));
             System.exit(0);
         }
     }

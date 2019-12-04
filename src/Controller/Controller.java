@@ -1,11 +1,13 @@
 
 package Controller;
 
+import DAO.JPAfactory;
 import DAO.JPApersistence;
 import Model.Base;
 import Util.DataType;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 public abstract class Controller {
     
@@ -43,5 +45,4 @@ public abstract class Controller {
     public int selectAmount() {
         return this.persistence.quantidade();
     }
-    
 }
