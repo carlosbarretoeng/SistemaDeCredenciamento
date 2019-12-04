@@ -1,13 +1,14 @@
 
 package Util;
 
+import Controller.UsuarioController;
 import DAO.JPAfactory;
 import Model.Base;
 import View.Main;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,15 +17,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Conexao extends Base{
-    public String driver, host, porta, usuario, senha, banco;
+    public String driver, host, porta, usuario, senha, banco, estrategia;
 
-    public Conexao(String driver, String host, String porta, String usuario, String senha, String banco) {
+    public Conexao(String driver, String host, String porta, String usuario, String senha, String banco, String estrategia) {
         this.driver = driver;
         this.host = host;
         this.porta = porta;
         this.usuario = usuario;
         this.senha = senha;
         this.banco = banco;
+        this.estrategia = estrategia;
     }
     
     public boolean testar() {
@@ -44,7 +46,22 @@ public class Conexao extends Base{
         propriedades.put("javax.persistence.jdbc.url", this.url());
         propriedades.put("javax.persistence.jdbc.user", this.usuario);
         propriedades.put("javax.persistence.jdbc.password", this.senha);
-        JPAfactory.configurar(propriedades);
+        propriedades.put("javax.persistence.schema-generation.database.action", this.estrategia);
+        try {
+            JPAfactory.configurar(propriedades);
+            new UsuarioController().select();
+            this.estrategia = "none";
+            Arquivo.escrever("arquivos//conexao.json", this.objectToJson());
+        }
+        catch(Exception e) {
+            this.estrategia = "drop-and-create";
+            try {
+                Arquivo.escrever("arquivos//conexao.json", this.objectToJson());
+            }
+            catch (IOException ex) {}
+            JOptionPane.showMessageDialog(null, "Você utilizou uma conexão nova. O sistema precisa ser reiniciado para a criação das tabelas...", "Error", WIDTH, new ImageIcon("icones//error.png"));
+            System.exit(0);
+        }
     }
     
     public String url() {

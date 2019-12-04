@@ -8,9 +8,13 @@ import Model.Pessoa;
 import Util.AuthService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -82,6 +86,7 @@ public class FormInscricao extends javax.swing.JDialog {
         jLabelStatusPessoa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Formulário de inscrições");
 
         jPanelBG.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -322,6 +327,20 @@ public class FormInscricao extends javax.swing.JDialog {
             if(EventoController.isFull(Integer.parseInt(this.jTextFieldEvento.getText()))) {
                 JOptionPane.showMessageDialog(rootPane, "O evento selecionado está cheio!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
                 return;
+            }
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date now = new Date();
+            JsonObject auxevento = new JsonParser().parse(new EventoController().select(Integer.parseInt(this.jTextFieldEvento.getText()))).getAsJsonObject();
+            String evtDate = auxevento.get("data_termino").getAsString() + " " + auxevento.get("horario_termino").getAsString() + ":00";
+            try {
+                if(now.compareTo(sdf.parse(evtDate))>0) {
+                    JOptionPane.showMessageDialog(rootPane, "Este evento já terminou!", "Error", JOptionPane.ERROR_MESSAGE, new ImageIcon("icones//error.png"));
+                    return;            
+                }
+            } 
+            catch (ParseException ex) {
+                Logger.getLogger(FormInscricao.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             JsonObject pessoa = new JsonObject();

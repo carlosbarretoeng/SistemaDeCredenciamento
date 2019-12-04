@@ -1,15 +1,6 @@
 package View;
 
-import DAO.JPAfactory;
-import Util.Arquivo;
 import Util.Conexao;
-import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -43,8 +34,10 @@ public class Configuracao extends javax.swing.JDialog {
         jTextFieldUsuario = new javax.swing.JTextField();
         jButtonConfigurar = new javax.swing.JButton();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
+        jButtonTestar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Configuração da conexão");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -56,24 +49,33 @@ public class Configuracao extends javax.swing.JDialog {
         jPanelURL.setBackground(new java.awt.Color(255, 255, 255));
         jPanelURL.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabel1.setText("Ip");
 
+        jTextFieldIp.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        jTextFieldIp.setText("localhost");
         jTextFieldIp.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jTextFieldIpCaretUpdate(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabel2.setText("Porta");
 
+        jTextFieldPorta.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        jTextFieldPorta.setText("3306");
         jTextFieldPorta.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jTextFieldPortaCaretUpdate(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabel3.setText("Nome do banco");
 
+        jTextFieldNomeDoBanco.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        jTextFieldNomeDoBanco.setText("mysql");
         jTextFieldNomeDoBanco.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 jTextFieldNomeDoBancoCaretUpdate(evt);
@@ -82,7 +84,13 @@ public class Configuracao extends javax.swing.JDialog {
 
         jTextAreaUrl.setEditable(false);
         jTextAreaUrl.setColumns(20);
+        jTextAreaUrl.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jTextAreaUrl.setRows(5);
+        jTextAreaUrl.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextAreaUrlCaretUpdate(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextAreaUrl);
 
         javax.swing.GroupLayout jPanelURLLayout = new javax.swing.GroupLayout(jPanelURL);
@@ -124,31 +132,60 @@ public class Configuracao extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNomeDoBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabelDriver.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabelDriver.setText("Driver");
 
+        jLabelUsuario.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabelUsuario.setText("Usuário");
 
+        jLabelURL.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabelURL.setText("URL");
 
+        jLabelSenha.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabelSenha.setText("Senha");
 
+        jComboBoxDriver.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jComboBoxDriver.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "com.mysql.jdbc.Driver" }));
 
+        jTextFieldUsuario.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jTextFieldUsuario.setText("root");
+        jTextFieldUsuario.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextFieldUsuarioCaretUpdate(evt);
+            }
+        });
 
+        jButtonConfigurar.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonConfigurar.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jButtonConfigurar.setText("Configurar");
+        jButtonConfigurar.setEnabled(false);
         jButtonConfigurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfigurarActionPerformed(evt);
             }
         });
 
+        jPasswordFieldSenha.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jPasswordFieldSenha.setText("123456");
+        jPasswordFieldSenha.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jPasswordFieldSenhaCaretUpdate(evt);
+            }
+        });
+
+        jButtonTestar.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonTestar.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        jButtonTestar.setText("Testar");
+        jButtonTestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTestarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBGLayout = new javax.swing.GroupLayout(jPanelBG);
         jPanelBG.setLayout(jPanelBGLayout);
@@ -163,9 +200,12 @@ public class Configuracao extends javax.swing.JDialog {
                     .addComponent(jLabelSenha)
                     .addComponent(jPasswordFieldSenha)
                     .addComponent(jTextFieldUsuario)
-                    .addComponent(jButtonConfigurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelURL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxDriver, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
+                        .addComponent(jButtonTestar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanelBGLayout.setVerticalGroup(
@@ -173,13 +213,13 @@ public class Configuracao extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelDriver)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxDriver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelURL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelURL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,8 +228,10 @@ public class Configuracao extends javax.swing.JDialog {
                 .addGap(4, 4, 4)
                 .addComponent(jPasswordFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConfigurar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonTestar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,7 +242,9 @@ public class Configuracao extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,7 +258,8 @@ public class Configuracao extends javax.swing.JDialog {
             this.jTextFieldPorta.getText(), 
             this.jTextFieldUsuario.getText(),
             new String(this.jPasswordFieldSenha.getPassword()),
-            this.jTextFieldNomeDoBanco.getText()
+            this.jTextFieldNomeDoBanco.getText(),
+            "none"
         );
 
         if(con.testar()) {
@@ -253,6 +298,37 @@ public class Configuracao extends javax.swing.JDialog {
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButtonTestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTestarActionPerformed
+        Conexao con = new Conexao(
+            this.jComboBoxDriver.getSelectedItem().toString(), 
+            this.jTextFieldIp.getText(), 
+            this.jTextFieldPorta.getText(), 
+            this.jTextFieldUsuario.getText(),
+            new String(this.jPasswordFieldSenha.getPassword()), 
+            this.jTextFieldNomeDoBanco.getText(),
+            "none"
+        );
+        if(con.testar()) {
+            this.jButtonConfigurar.setEnabled(true);
+            JOptionPane.showMessageDialog(null, "Conexão válida!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Erro ao estabelecer conexao!", "Error", 0, new ImageIcon("icones//error.png"));
+        }
+    }//GEN-LAST:event_jButtonTestarActionPerformed
+
+    private void jTextAreaUrlCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextAreaUrlCaretUpdate
+        this.jButtonConfigurar.setEnabled(false);
+    }//GEN-LAST:event_jTextAreaUrlCaretUpdate
+
+    private void jTextFieldUsuarioCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioCaretUpdate
+        this.jButtonConfigurar.setEnabled(false);
+    }//GEN-LAST:event_jTextFieldUsuarioCaretUpdate
+
+    private void jPasswordFieldSenhaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jPasswordFieldSenhaCaretUpdate
+        this.jButtonConfigurar.setEnabled(false);
+    }//GEN-LAST:event_jPasswordFieldSenhaCaretUpdate
 
     
     
@@ -298,6 +374,7 @@ public class Configuracao extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfigurar;
+    private javax.swing.JButton jButtonTestar;
     private javax.swing.JComboBox<String> jComboBoxDriver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

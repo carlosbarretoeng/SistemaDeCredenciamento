@@ -67,6 +67,7 @@ public class FormPessoa extends javax.swing.JDialog {
         jTextFieldMatricula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Formulário de pessoas");
 
         jPanelBg.setBackground(new java.awt.Color(255, 255, 255));
 

@@ -46,18 +46,17 @@ public class Main extends javax.swing.JFrame {
         Conexao con = Conexao.get();
         if (!con.testar()) {
             new Configuracao(this, true).setVisible(true);
-        } else {
+        } 
+        else {
             con.configurar();
         }
-        System.out.println(EventoController.isFull(1));
-        Table.fill(new EventoController().select(), jTableEventos, Evento.class);
         this.setLayouts();
         this.getContentPane().setBackground(Color.white);
         new Dragged(this.jPanelDragged, this);
         this.setLocationRelativeTo(null);
         this.setIcons();
         this.jPanelSubConfigBG.setVisible(false);
-        this.gerenciarBotoes(AuthService.usuario.get("tipo").getAsString().equals("admin"));
+        //this.gerenciarBotoes(AuthService.usuario.get("tipo").getAsString().equals("admin"));
         new Relogio(jLabelRelogio);
     }
     
@@ -103,6 +102,7 @@ public class Main extends javax.swing.JFrame {
         this.jLabelVerPessoa.setIcon(new ImageIcon("icones//link.png"));
         this.jLabelInscricaoAtualizar.setIcon(new ImageIcon("icones//atualizar.png"));
         this.jLabelInscricaoExcluir.setIcon(new ImageIcon("icones//error.png"));
+        this.jLabelEventosCredenciamento.setIcon(new ImageIcon("icones//inscricoes.png"));
     }
 
     @SuppressWarnings("unchecked")

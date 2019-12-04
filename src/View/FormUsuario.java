@@ -49,6 +49,7 @@ public class FormUsuario extends javax.swing.JDialog {
         jLabelConfirmar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Formulário de usuários");
 
         jPanelBGUsuarioForm.setBackground(new java.awt.Color(255, 255, 255));
 

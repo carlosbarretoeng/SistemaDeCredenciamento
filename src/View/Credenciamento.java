@@ -39,6 +39,7 @@ public class Credenciamento extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.jLabelNomeUsuario.setText(AuthService.usuario.get("nome").getAsString());
         this.jLabelVerPessoa.setIcon(new ImageIcon("icones//link.png"));
+        this.jLabelVerCredenciamentos.setIcon(new ImageIcon("icones//link.png"));
         Table.fill(new InscricaoController().getPessoas(this.evento.get("id").getAsInt()), jTablePessoas, Pessoa.class);
         this.gerenciarCard();
         new Relogio(this.jLabelData);
@@ -88,12 +89,14 @@ public class Credenciamento extends javax.swing.JDialog {
         jLabelNomeEvento = new javax.swing.JLabel();
         jLabelNomeUsuario = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabelVerCredenciamentos = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Credenciamento de presenças");
 
         jPanelBG.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -172,6 +175,7 @@ public class Credenciamento extends javax.swing.JDialog {
 
         jLabelVerPessoa.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
         jLabelVerPessoa.setText("Ver pessoa");
+        jLabelVerPessoa.setToolTipText("ver pessoa selecionada");
         jLabelVerPessoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelVerPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -287,7 +291,7 @@ public class Credenciamento extends javax.swing.JDialog {
                                 .addGap(55, 55, 55)
                                 .addComponent(jButtonConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabelPessoa1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 4, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelPessoasListLayout.setVerticalGroup(
@@ -346,6 +350,16 @@ public class Credenciamento extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         jLabel7.setText("Usuário atual");
 
+        jLabelVerCredenciamentos.setFont(new java.awt.Font("Calibri Light", 0, 18)); // NOI18N
+        jLabelVerCredenciamentos.setText("Ver credenciamentos");
+        jLabelVerCredenciamentos.setToolTipText("ver todas pessoas credenciadas deste evento");
+        jLabelVerCredenciamentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelVerCredenciamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelVerCredenciamentosMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBGLayout = new javax.swing.GroupLayout(jPanelBG);
         jPanelBG.setLayout(jPanelBGLayout);
         jPanelBGLayout.setHorizontalGroup(
@@ -353,30 +367,33 @@ public class Credenciamento extends javax.swing.JDialog {
             .addGroup(jPanelBGLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanelBGLayout.createSequentialGroup()
-                            .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanelCardCred, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanelFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelBGLayout.createSequentialGroup()
-                            .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelBGLayout.createSequentialGroup()
-                                    .addComponent(jLabelData1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabelNomeEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(202, 202, 202)
-                            .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7)))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
+                        .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelVerCredenciamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBGLayout.createSequentialGroup()
+                        .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanelCardCred, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelFiltro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelBGLayout.createSequentialGroup()
+                                .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelBGLayout.createSequentialGroup()
+                                        .addComponent(jLabelData1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabelNomeEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(202, 202, 202)
+                                .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanelBGLayout.setVerticalGroup(
             jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBGLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -391,14 +408,17 @@ public class Credenciamento extends javax.swing.JDialog {
                     .addComponent(jLabelData1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelCardCred, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBGLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelBGLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGroup(jPanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelVerPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelVerCredenciamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBGLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -409,7 +429,7 @@ public class Credenciamento extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBG, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelBG, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -519,6 +539,10 @@ public class Credenciamento extends javax.swing.JDialog {
         this.gerenciarCard();
     }//GEN-LAST:event_jButtonConfirmar2ActionPerformed
 
+    private void jLabelVerCredenciamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelVerCredenciamentosMouseClicked
+        new PessoasCredenciadas(null, true, Integer.parseInt(this.evento.get("id").getAsString())).setVisible(true);
+    }//GEN-LAST:event_jLabelVerCredenciamentosMouseClicked
+
     public void confirmar(int pessoa) {
         JsonObject cred = new JsonObject(), inscricao = new JsonParser().parse(new InscricaoController().getInscricao(this.evento.get("id").getAsInt(), pessoa)).getAsJsonObject(), usuario = new JsonObject();
         usuario.add("id", new JsonPrimitive(AuthService.usuario.get("id").getAsInt()));
@@ -607,6 +631,7 @@ public class Credenciamento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelPessoaCPF;
     private javax.swing.JLabel jLabelPessoaCPF1;
     private javax.swing.JLabel jLabelStatus;
+    private javax.swing.JLabel jLabelVerCredenciamentos;
     private javax.swing.JLabel jLabelVerPessoa;
     private javax.swing.JPanel jPanelBG;
     private javax.swing.JPanel jPanelCardCred;
