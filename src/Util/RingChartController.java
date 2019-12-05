@@ -15,8 +15,8 @@ import org.jfree.chart.plot.RingPlot;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.HorizontalAlignment;
-import org.jfree.ui.RectangleInsets;
+import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.ui.RectangleInsets;
 
 public class RingChartController {
 

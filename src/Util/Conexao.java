@@ -34,10 +34,11 @@ public class Conexao extends Base{
     public boolean testar() {
         try {
             Class.forName(driver);
-            Connection con = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.porta, usuario, senha);
+            Connection con = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.porta + "/" + this.banco + "?useSSL=false", usuario, senha);
             Statement stmt = con.createStatement();
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS " + this.banco);
             stmt.executeUpdate("SET @@global.time_zone = '+3:00'");
+            stmt.close();
             con.close();
         }
         catch (ClassNotFoundException | SQLException e) {
@@ -65,9 +66,11 @@ public class Conexao extends Base{
             try {
                 Arquivo.escrever("arquivos//conexao.json", this.objectToJson());
             }
-            catch (IOException ex) {}
-            JOptionPane.showMessageDialog(null, "Você está utilizando uma conexão nova. O sistema precisa ser reiniciado para a criação das tabelas...", "Error", WIDTH, new ImageIcon("icones//error.png"));
-            System.exit(0);
+            catch (IOException ex) {
+                System.out.println(ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Você está utilizando uma conexão nova. O sistema precisa ser reiniciado para a criação das tabelas...", "Error", WIDTH, new ImageIcon("icones//error.png"));
+                System.exit(0);
+            }
         }
     }
     

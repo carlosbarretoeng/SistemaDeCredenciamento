@@ -5,6 +5,7 @@ import Controller.PessoaController;
 import Controller.UsuarioController;
 import com.google.gson.JsonObject;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class FormPessoa extends javax.swing.JDialog {
 
@@ -240,17 +241,21 @@ public class FormPessoa extends javax.swing.JDialog {
     }//GEN-LAST:event_jLabelCancelarMouseClicked
 
     private void jLabelConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelConfirmarMouseClicked
-        json.addProperty("nome", this.jTextFieldNome.getText());
-        json.addProperty("matricula", this.jTextFieldMatricula.getText());
-        json.addProperty("cpf", this.jFormattedTextFieldCpf.getText());
-        json.addProperty("rg", this.jFormattedTextFieldRg.getText());
-        json.addProperty("endereco", this.jTextFieldEndereco.getText());
-        json.addProperty("email", this.jTextFieldEmail.getText());
-        json.addProperty("cidade", this.jTextFieldCidade.getText());
-        json.addProperty("telefone", this.jTextFieldTelefone.getText());
-        new PessoaController().insert(json.toString());
-        cancel = false;
-        this.dispose();
+        try{
+            json.addProperty("nome", this.jTextFieldNome.getText());
+            json.addProperty("matricula", this.jTextFieldMatricula.getText());
+            json.addProperty("cpf", this.jFormattedTextFieldCpf.getText());
+            json.addProperty("rg", this.jFormattedTextFieldRg.getText());
+            json.addProperty("endereco", this.jTextFieldEndereco.getText());
+            json.addProperty("email", this.jTextFieldEmail.getText());
+            json.addProperty("cidade", this.jTextFieldCidade.getText());
+            json.addProperty("telefone", this.jTextFieldTelefone.getText());
+            new PessoaController().insert(json.toString());
+            cancel = false;
+            this.dispose();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Não foi possível registrar essa pessoa. Por favor, verifique os dados.", "Error", 0, new ImageIcon("icones//error.png"));
+        }
     }//GEN-LAST:event_jLabelConfirmarMouseClicked
 
     public static void main(String args[]) {

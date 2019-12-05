@@ -171,7 +171,7 @@ public class FormUsuario extends javax.swing.JDialog {
     private void jLabelConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelConfirmarMouseClicked
         json.addProperty("nome", this.jTextFieldNome.getText());
         json.addProperty("login", this.jTextFieldLogin.getText());
-        json.addProperty("senha", new String(this.jPasswordFieldSenha.getPassword()));
+        json.addProperty("senha", Util.Encrypt.run(new String(new String(this.jPasswordFieldSenha.getPassword()))));
         json.addProperty("tipo", this.jComboBoxTipo.getSelectedItem().toString());
         if(!editing)
             json.addProperty("id", 0);

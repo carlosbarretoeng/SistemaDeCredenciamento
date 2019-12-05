@@ -8,14 +8,14 @@ import Util.Conexao;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JDialog {
 
     private final UsuarioController usuarioController = new UsuarioController();
     
     public Login() {
         Conexao con = Conexao.get();
         if(!con.testar()) {
-            new Configuracao(this, true).setVisible(true);
+            new Configuracao(null, true).setVisible(true);
         }
         else {
             con.configurar();
@@ -43,7 +43,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
         setBackground(new java.awt.Color(255, 255, 255));
 

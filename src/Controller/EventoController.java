@@ -24,8 +24,12 @@ public class EventoController extends Controller {
     
     public static boolean isFull(int id) {
         EntityManager manager = JPAfactory.getManager(); 
-        String SQL = "select count(*)>=e.capacidade from Model.Evento e, Model.Inscricao i where i.evento=e.id and e.id=" + id;
-        return (boolean) manager.createQuery(SQL).getResultList().get(0);
+        String SQL = "select e.capacidade from Model.Evento e where e.id=" + id;
+        int capacidade = (int)  manager.createQuery(SQL).getResultList().get(0);
+        
+        SQL = "select count(*) from Model.Inscricao i where i.evento=" + id;
+        Long inscritos = (Long) manager.createQuery(SQL).getResultList().get(0);
+        return (boolean) (inscritos.intValue() >= capacidade);
     }
     
 }

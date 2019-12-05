@@ -11,4 +11,8 @@ public class AuthService {
     public static void setUsuario(String login) {
         AuthService.usuario = (JsonObject) new JsonParser().parse(new UsuarioController().select(login));
     }
+    
+    public static JsonObject getUsuario() {
+        return usuario;
+    }
 }

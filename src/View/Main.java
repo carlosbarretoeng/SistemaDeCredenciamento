@@ -38,7 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
 public class Main extends javax.swing.JFrame {
-
+    
     public Main() {
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -1585,6 +1585,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelSubMenuConfigMouseExited
 
     private void jLabelMenuDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMenuDadosMouseClicked
+        if(!AuthService.getUsuario().get("tipo").getAsString().equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanelContent, "Você não tem permissão para Exportar/Importar Dados", "Error", 0, new ImageIcon("icones//error.png"));
+            return;
+        }
         this.alterarBox(this.jPanelDados);
     }//GEN-LAST:event_jLabelMenuDadosMouseClicked
 
@@ -1735,6 +1740,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelExportBGMouseClicked
 
     private void jLabelAddEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddEventosMouseClicked
+        if(!AuthService.getUsuario().get("tipo").getAsString().equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanelContent, "Você não tem permissão para gerir Eventos", "Error", 0, new ImageIcon("icones//error.png"));
+            return;
+        }
         new FormEventos(this, true).setVisible(true);
         if(!FormEventos.cancel) {
             new EventoController().select();
@@ -1833,6 +1843,11 @@ public class Main extends javax.swing.JFrame {
     }
     
     private void jLabelEventosExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventosExcluirMouseClicked
+        if(!AuthService.getUsuario().get("tipo").getAsString().equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanelContent, "Você não tem permissão para gerir Eventos", "Error", 0, new ImageIcon("icones//error.png"));
+            return;
+        }
         try {
             int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id")));
 
@@ -1853,6 +1868,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelEventosExcluirMouseClicked
 
     private void jLabelEventosAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEventosAtualizarMouseClicked
+        if(!AuthService.getUsuario().get("tipo").getAsString().equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanelContent, "Você não tem permissão para gerir Eventos", "Error", 0, new ImageIcon("icones//error.png"));
+            return;
+        }
         try {
             int id = Integer.parseInt((String) this.jTableEventos.getValueAt(this.jTableEventos.getSelectedRow(), Table.getColumnIndex(jTableEventos, "id")));
             new FormEventos(this, true, new JsonParser().parse(new EventoController().select(id)).getAsJsonObject()).setVisible(true);
@@ -2007,10 +2027,30 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFiltroUsuCaretUpdate
 
     private void jLabelUsuarioExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUsuarioExcluirMouseClicked
-        // TODO add your handling code here:
+        if(!AuthService.getUsuario().get("tipo").getAsString().equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanelContent, "Você não tem permissão para gerir Usuários", "Error", 0, new ImageIcon("icones//error.png"));
+            return;
+        }
+        int id = Integer.parseInt((String) this.jTableUsuarios.getValueAt(this.jTableUsuarios.getSelectedRow(), Table.getColumnIndex(jTableUsuarios, "id")));
+        if (JOptionPane.showConfirmDialog(jPanelContent, "Realmente deseja excluir o registro?", "Confirmação", JOptionPane.YES_NO_OPTION) == 0) {
+            try {
+                new UsuarioController().delete(id);
+                JOptionPane.showMessageDialog(jPanelContent, "Registro excluído com sucesso!", "Sucesso", 0, new ImageIcon("icones//success.png"));
+                Table.fill(new UsuarioController().select(), jTableUsuarios, Usuario.class);
+            }
+            catch(Exception e) {
+                JOptionPane.showMessageDialog(jPanelContent, "Erro ao excluir registro! " + e.getCause(), "Error", 0, new ImageIcon("icones//error.png"));
+            }
+        }
     }//GEN-LAST:event_jLabelUsuarioExcluirMouseClicked
 
     private void jLabelUsuarioAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUsuarioAtualizarMouseClicked
+        if(!AuthService.getUsuario().get("tipo").getAsString().equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanelContent, "Você não tem permissão para gerir Usuários", "Error", 0, new ImageIcon("icones//error.png"));
+            return;
+        }
         try {
             int id = Integer.parseInt((String) this.jTableUsuarios.getValueAt(this.jTableUsuarios.getSelectedRow(), Table.getColumnIndex(jTableUsuarios, "id")));
             new FormUsuario(this, true, new JsonParser().parse(new UsuarioController().select(id)).getAsJsonObject()).setVisible(true);
@@ -2030,6 +2070,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelUsuarioAtualizarMouseClicked
 
     private void jLabelAddUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddUsuariosMouseClicked
+        if(!AuthService.getUsuario().get("tipo").getAsString().equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanelContent, "Você não tem permissão para gerir Usuários", "Error", 0, new ImageIcon("icones//error.png"));
+            return;
+        }
         try {
             new FormUsuario(this, true).setVisible(true);
             if (!FormUsuario.cancel) {
