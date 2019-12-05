@@ -1615,8 +1615,8 @@ public class Main extends javax.swing.JFrame {
         DataType dataType = (this.jRadioButtonJson.isSelected()) ? DataType.JSON : DataType.XML;
 
         if (DataType.XML.equals(dataType)) {
-            JOptionPane.showMessageDialog(this, "Importações com XML em desenvolvimento!");
-            return;
+            //JOptionPane.showMessageDialog(this, "Importações com XML em desenvolvimento!");
+            //return;
         }
 
         new FileScreen(this, true, JFileChooser.FILES_ONLY, dataType).setVisible(true);
@@ -1678,8 +1678,8 @@ public class Main extends javax.swing.JFrame {
         DataType dataType = (this.jRadioButtonJson.isSelected()) ? DataType.JSON : DataType.XML;
 
         if (DataType.XML.equals(dataType)) {
-            JOptionPane.showMessageDialog(this, "Exportações com XML em desenvolvimento!");
-            return;
+            //JOptionPane.showMessageDialog(this, "Exportações com XML em desenvolvimento!");
+            //return;
         }
 
         String classeNome = this.jListClassesExp.getSelectedValue().toString();

@@ -22,11 +22,11 @@ public abstract class Base implements Serializable {
     }
 
     public Base jsonToObject(String json) {
-        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(json, this.getClass());
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").setLenient().create().fromJson(json, this.getClass());
     }
 
     public String objectToJson() {
-        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(this);
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd").setLenient().create().toJson(this);
     }
     
     public Base xmlToObject(String xml) {
